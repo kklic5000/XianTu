@@ -34,17 +34,19 @@ export const toNumber = (v: unknown, fallback = 0): number => {
 
 // ─── 品级 ────────────────────────────────────────────────
 
-/** 品级文字：0 残缺 / 1–3 下品 / 4–6 中品 / 7–9 上品 / 10 极品；字符串原样返回 */
+/** 品级文字：0 粗制 / 1–2 寻常 / 3–4 精良 / 5–6 上乘 / 7–8 珍稀 / 9 秘制 / 10 绝世；字符串原样返回 */
 export function getGradeText(grade: unknown): string {
   if (grade === null || grade === undefined || grade === '') return '';
   if (typeof grade === 'string' && !/^\d+$/.test(grade.trim())) return grade.trim();
   const g = toNumber(grade, -1);
   if (g < 0) return '';
-  if (g === 0) return '残缺';
-  if (g <= 3) return '下品';
-  if (g <= 6) return '中品';
-  if (g <= 9) return '上品';
-  return '极品';
+  if (g === 0) return '粗制';
+  if (g <= 2) return '寻常';
+  if (g <= 4) return '精良';
+  if (g <= 6) return '上乘';
+  if (g <= 8) return '珍稀';
+  if (g === 9) return '秘制';
+  return '绝世';
 }
 
 /** 「天品 · 上品」这样的品质全称 */
