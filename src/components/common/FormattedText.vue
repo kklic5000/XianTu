@@ -90,7 +90,7 @@
             <ol class="help-list">
               <li><strong>{{ $t('基础值') }}</strong>：{{ $t('底子 10 + 有效属性加权 + 境界加成。有效属性 = 先天×70% + 后天×30%') }}</li>
               <li><strong>{{ $t('幸运点') }}</strong>：{{ $t('气运越高，区间从 -8～+6 抬到 -3～+16') }}</li>
-              <li><strong>{{ $t('环境修正') }}</strong>：{{ $t('灵气浓度影响（修炼/炼丹/战斗），探索社交不受影响') }}</li>
+              <li><strong>{{ $t('环境修正') }}</strong>：{{ $t('地气影响（练功/炼药/战斗），探索社交不受影响') }}</li>
               <li><strong>{{ $t('状态修正') }}</strong>：{{ $t('伤病只取最重一项（最多 -6），加上 Buff/Debuff，合计 -10～+15') }}</li>
             </ol>
           </section>
@@ -174,12 +174,12 @@ import { extractStreamingNarrative } from '@/utils/textSanitizer'
 import { computeJudgementResult } from '@/utils/judgement'
 
 const ATTRIBUTE_HELP = [
-  { name: '根骨', desc: '决定气血上限、恢复速度、寿命上限。影响炼体修行、抗打击能力。' },
-  { name: '灵性', desc: '决定灵气上限、吸收效率。影响修炼速度、法术威力。' },
-  { name: '悟性', desc: '决定神识上限、学习效率。影响功法领悟、技能掌握速度。' },
-  { name: '气运', desc: '决定各种概率、物品掉落品质。影响天材地宝获取、贵人相助。' },
+  { name: '根骨', desc: '决定气血上限、恢复速度、寿命上限。影响横练功夫、抗打击能力。' },
+  { name: '经脉', desc: '决定内力上限与调息效率。影响练功速度、内力深厚程度。' },
+  { name: '悟性', desc: '决定感知上限、学习效率。影响武功领悟、招式掌握速度。' },
+  { name: '福缘', desc: '决定各种概率、物品掉落品质。影响奇遇机缘、贵人相助。' },
   { name: '魅力', desc: '决定初始好感度、社交加成。影响NPC互动、门派声望获取。' },
-  { name: '心性', desc: '决定心魔抗性、意志力。影响走火入魔抵抗、关键抉择。' },
+  { name: '定力', desc: '决定心魔抗性、意志力。影响走火入魔抵抗、关键抉择。' },
 ]
 
 const showHelpModal = ref(false)
