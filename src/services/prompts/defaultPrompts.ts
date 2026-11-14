@@ -11,6 +11,7 @@ import { getSaveDataStructureForEnv } from '@/utils/prompts/definitions/dataDefi
 import { CHARACTER_INIT_TASK_PROMPT } from '@/utils/prompts/tasks/characterInitializationPrompts';
 import { EnhancedWorldPromptBuilder } from '@/utils/worldGeneration/enhancedWorldPrompts';
 import { promptStorage } from './promptStorage';
+import { JINYONG_PROMPTS } from './jinyongPrompts';
 import { isTavernEnv } from '@/utils/tavern';
 // 核心规则
 import { JSON_OUTPUT_RULES, RESPONSE_FORMAT_RULES, DATA_STRUCTURE_STRICTNESS, NARRATIVE_PURITY_RULES } from '@/utils/prompts/definitions/coreRules';
@@ -349,7 +350,7 @@ const TEXT_OPTIMIZATION_PROMPT = `
 
 export function getSystemPrompts(): Record<string, PromptDefinition> {
   const tavernEnv = isTavernEnv();
-  return {
+  const prompts: Record<string, PromptDefinition> = {
     // ==================== 核心请求提示词（合并版） ====================
     coreOutputRules: {
       name: '1. 输出格式',
@@ -524,6 +525,11 @@ export function getSystemPrompts(): Record<string, PromptDefinition> {
       weight: 5
     }
   };
+  // 金庸模式：以 JINYONG_PROMPTS 覆盖同名默认内容
+  for (const [key, content] of Object.entries(JINYONG_PROMPTS)) {
+    if (prompts[key]) prompts[key] = { ...prompts[key], content };
+  }
+  return prompts;
 }
 
 /**
