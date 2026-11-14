@@ -13,7 +13,7 @@ export type CraftingFormationInput = {
 };
 
 export type CraftingResourcePlan = {
-  内力: {
+  灵气: {
     当前: number;
     投入百分比: number;
     阵法额外百分比: number;
@@ -21,7 +21,7 @@ export type CraftingResourcePlan = {
     额外消耗: number;
     总消耗: number;
   };
-  感知: {
+  神识: {
     当前: number;
     投入百分比: number;
     阵法额外百分比: number;
