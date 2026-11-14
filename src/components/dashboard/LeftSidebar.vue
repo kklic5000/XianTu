@@ -153,17 +153,17 @@ const navSections = computed<Array<{ title: string; short: string; items: NavIte
       title: '角色信息',
       short: '角色',
       items: [
-        { key: 'details', label: '人物属性', desc: '修为境界状态', icon: User, path: '/game/character-details', onClick: handleCharacterDetails },
+        { key: 'details', label: '人物属性', desc: '武学层级状态', icon: User, path: '/game/character-details', onClick: handleCharacterDetails },
         { key: 'inventory', label: '背包物品', desc: '管理道具装备', icon: Package, path: '/game/inventory', onClick: handleInventory },
       ],
     },
     {
-      title: '修炼系统',
-      short: '修炼',
+      title: '练功系统',
+      short: '练功',
       items: [
-        { key: 'techniques', label: '功法技能', desc: '修炼突破晋级', icon: BookOpen, path: '/game/techniques', onClick: handleTechniques },
-        { key: 'dao', label: '大道感悟', desc: '领悟天地法则', icon: Zap, path: '/game/thousand-dao', onClick: handleThousandDao },
-        { key: 'crafting', label: '炼制工坊', desc: '炼丹炼器炼天地', icon: Hammer, path: '/game/crafting', onClick: handleCrafting },
+        { key: 'techniques', label: '功法技能', desc: '练功冲关精进', icon: BookOpen, path: '/game/techniques', onClick: handleTechniques },
+        { key: 'dao', label: '武道感悟', desc: '领悟武学至理', icon: Zap, path: '/game/thousand-dao', onClick: handleThousandDao },
+        { key: 'crafting', label: '炼制工坊', desc: '炼药铸器走江湖', icon: Hammer, path: '/game/crafting', onClick: handleCrafting },
       ],
     },
     {
@@ -178,7 +178,7 @@ const navSections = computed<Array<{ title: string; short: string; items: NavIte
       title: '社交势力',
       short: '社交',
       items: [
-        { key: 'sect', label: '宗门事务', desc: '门派事务管理', icon: Home, path: '/game/sect', onClick: handleSect },
+        { key: 'sect', label: '门派事务', desc: '门派事务管理', icon: Home, path: '/game/sect', onClick: handleSect },
         { key: 'npcs', label: '人物名录', desc: '结识的人物与好感', icon: Users, path: '/game/npcs', onClick: openNpcList },
         { key: 'memory', label: '记忆档案', desc: '重要事件回顾', icon: Brain, path: '/game/memory', onClick: handleMemoryCenter },
         { key: 'gallery', label: '图廊', desc: '本局生成的剧情插图', icon: Images, path: '/game/gallery', onClick: () => router.push('/game/gallery'), disabled: !activeCharacter.value },
