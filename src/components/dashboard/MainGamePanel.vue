@@ -955,14 +955,14 @@ const timeOptions = ref([
 // 行动分类数据
 const actionCategories = ref<ActionCategory[]>([
   {
-    name: '修炼',
+    name: '练功',
     icon: '',
     actions: [
       {
-        name: '基础修炼',
+        name: '基础练功',
         icon: '⚡',
         type: 'cultivation',
-        description: '吐纳天地灵气，淬炼自身修为，是提升境界的根本之法。',
+        description: '吐纳调息，锤炼自身内力，是提升武学层级的根本之法。',
         timeRequired: true
       },
       {
@@ -970,15 +970,15 @@ const actionCategories = ref<ActionCategory[]>([
         icon: 'Shield',
         iconComponent: Shield,
         type: 'cultivation',
-        description: '以灵气或外力锤炼肉身，强化筋骨皮膜，增强体魄与防御。',
+        description: '以内力或外力锤炼肉身，强化筋骨皮膜，增强体魄与防御。',
         timeRequired: true
       },
       {
-        name: '冥想',
+        name: '打坐',
         icon: 'BrainCircuit',
         iconComponent: BrainCircuit,
         type: 'cultivation',
-        description: '沉入心海，观想天地，可稳固心境，提升神识，偶有顿悟。',
+        description: '沉入心海，观想天地，可稳固心境，提升感知，偶有顿悟。',
         timeRequired: true
       }
     ]
