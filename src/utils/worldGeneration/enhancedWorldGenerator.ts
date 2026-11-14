@@ -9,6 +9,7 @@ import type { WorldInfo } from '@/types/game.d';
 import { calculateSectData, type SectCalculationData } from './sectDataCalculator';
 import { WorldMapConfig } from '@/types/worldMap';
 import { promptStorage } from '@/services/promptStorage';
+import { JINYONG_PROMPTS } from '@/services/prompts/jinyongPrompts';
 import { parseJsonSmart } from '@/utils/jsonExtract';
 import { aiService } from '@/services/aiService';
 
@@ -266,7 +267,7 @@ export class EnhancedWorldGenerator {
       if (customPrompt && customPrompt.trim()) {
         // 检查是否是用户修改过的（通过检查 modified 标记）
         const allPrompts = await promptStorage.loadAll();
-        if (allPrompts['worldGeneration']?.modified) {
+        if (allPrompts['worldGeneration']?.modified || JINYONG_PROMPTS.worldGeneration) {
           return customPrompt;
         }
       }
