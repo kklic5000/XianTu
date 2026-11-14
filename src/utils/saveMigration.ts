@@ -268,7 +268,7 @@ const buildDefaultOnline = (): SaveDataV3['系统']['联机'] => ({
 });
 
 const buildDefaultWorldInfo = (nowIso: string) => ({
-  世界名称: '朝天大陆',
+  世界名称: '中原',
   大陆信息: [],
   势力信息: [],
   地点信息: [],
@@ -284,10 +284,10 @@ const buildDefaultIdentity = () => ({
   性别: '男',
   出生日期: { 年: 982, 月: 1, 日: 1 },
   种族: '人族',
-  世界: '朝天大陆',
+  世界: '中原',
   天资: '凡人',
   出生: '散修',
-  灵根: '五行杂灵根',
+  灵根: '五行杂脉',
   天赋: [],
   先天六司: { 根骨: 5, 灵性: 5, 悟性: 5, 气运: 5, 魅力: 5, 心性: 5 },
   后天六司: { 根骨: 0, 灵性: 0, 悟性: 0, 气运: 0, 魅力: 0, 心性: 0 },
@@ -350,7 +350,7 @@ export function migrateSaveDataToLatest(raw: SaveData): { migrated: SaveDataV3; 
     source.位置 ??
     (legacyStatusObj as any).位置 ??
     (source.状态位置 as any) ??
-    { 描述: '朝天大陆·无名之地', x: 5000, y: 5000 };
+    { 描述: '中原·无名之地', x: 5000, y: 5000 };
 
   const flatTime = coerceTime(source.元数据?.时间 ?? source.时间 ?? source.游戏时间);
 
