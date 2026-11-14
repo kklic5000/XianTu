@@ -13,7 +13,7 @@ export type CraftingFormationInput = {
 };
 
 export type CraftingResourcePlan = {
-  灵气: {
+  内力: {
     当前: number;
     投入百分比: number;
     阵法额外百分比: number;
@@ -21,7 +21,7 @@ export type CraftingResourcePlan = {
     额外消耗: number;
     总消耗: number;
   };
-  神识: {
+  感知: {
     当前: number;
     投入百分比: number;
     阵法额外百分比: number;
@@ -84,16 +84,16 @@ const REALM_QUALITY_CAP = `
 ## 境界 → 成品品质上限（硬性，任何情况下不可突破）
 | 角色境界 | 品质上限 |
 |---|---|
-| 凡人 / 练气 | 黄品（通常只能出凡品） |
-| 筑基 | 玄品 |
-| 金丹 | 地品 |
-| 元婴 / 化神 | 天品 |
-| 炼虚及以上 | 仙品（极罕见） |
+| 凡人 / 三流 | 黄品（通常只能出凡品） |
+| 二流 | 玄品 |
+| 一流 | 地品 |
+| 绝顶 / 宗师 | 天品 |
+| 宗师 | 仙品（极罕见） |
 | 神品 | 仅存于传说，炼制不可得 |
 另：成品品质不会超过主材料品质，通常还略低一些；凡品材料炼不出黄品以上。`.trim();
 
 const DAO_PROFICIENCY_RULE = `
-## 对应大道（炼丹看丹道，炼器看器道；角色信息里写作"丹道·阶段N"）
+## 对应大道（炼药看丹道，铸器看器道；角色信息里写作"丹道·阶段N"）
 | 大道情况 | 成功率参考 | 品质参考 | 文案表现 |
 |---|---|---|---|
 | 无对应大道 / 阶段0 | 5-15% | 最高凡品下品 | 手法生疏、险象环生 |
@@ -103,13 +103,13 @@ const DAO_PROFICIENCY_RULE = `
 | 阶段4及以上 | 可更高 | 可尝试更高品质 | 技艺娴熟 |
 大道只影响成功率与品质，品质仍受上面的境界上限约束。`.trim();
 
-const RESOURCE_RULE = '若提供 resources（灵气/神识投入计划）：描写与数值都要与之一致，任何消耗都不得超过其中的"当前"值。';
+const RESOURCE_RULE = '若提供 resources（内力/感知投入计划）：描写与数值都要与之一致，任何消耗都不得超过其中的"当前"值。';
 
 function craftingInputLines(input: { type: CraftingType; fire: CraftingFireInput; formation: CraftingFormationInput }): string {
   return [
     `炼制类型：${input.type}`,
     `火候强度：${input.fire.percent}%（${input.fire.label}）`,
-    `阵法：${input.formation.name}（额外消耗：灵气+${input.formation.extraManaPercent}% / 神识+${input.formation.extraSpiritPercent}%）`,
+    `阵法：${input.formation.name}（额外消耗：内力+${input.formation.extraManaPercent}% / 感知+${input.formation.extraSpiritPercent}%）`,
   ].join('\n');
 }
 
@@ -149,7 +149,7 @@ ${craftingInputLines(input)}
 结果：${input.success ? '成功' : '失败'}
 成品品质：${input.resultQuality.quality}品·${String(input.resultQuality.grade)}
 
-灵气/神识投入计划：
+内力/感知投入计划：
 ${json(input.resources)}
 
 材料清单（只能使用这些材料）：
@@ -194,7 +194,7 @@ ${craftingInputLines(input)}
 材料清单：
 ${json(input.materials)}
 
-灵气/神识投入与上限：
+内力/感知投入与上限：
 ${json(input.resources)}
 
 角色信息（可能为空）：
@@ -213,7 +213,7 @@ export function buildCraftingFinalizePrompts(input: CraftingFinalizeInput): { sy
 2. 必须包含 success(布尔)、successRate(数字)、item(对象)、processText(字符串)、eventDesc(字符串)。
 3. 给了推演结果时，successRate 与推演一致；没给则按规则推导 5-95 的整数。predictedQuality 仅作参考，最终品质仍受境界上限约束。
 4. item 使用中文字段：物品ID(留空字符串即可)、名称、类型、品质{quality,grade}、数量、描述、可叠加(可选)。
-5. 炼丹成功 → 类型为"丹药"；炼器成功 → 类型为"装备"；失败产物（废丹/炉渣等）类型可为"丹药"或"材料/其他"，但必须与描述一致。
+5. 炼药成功 → 类型为"丹药"；铸器成功 → 类型为"装备"；失败产物（废丹/炉渣等）类型可为"丹药"或"材料/其他"，但必须与描述一致。
 6. ${RESOURCE_RULE}
 
 ${REALM_QUALITY_CAP}
@@ -249,7 +249,7 @@ ${craftingInputLines(input)}
 材料清单：
 ${json(input.materials)}
 
-灵气/神识投入与上限：
+内力/感知投入与上限：
 ${json(input.resources)}
 
 推演结果（如果有）：
