@@ -51,12 +51,12 @@
         <div class="section-header">
           <span class="line"></span>
           <span class="gem" aria-hidden="true"></span>
-          <span class="text">{{ $t('择一道途') }}</span>
+          <span class="text">{{ $t('择一去处') }}</span>
           <span class="gem" aria-hidden="true"></span>
           <span class="line"></span>
         </div>
 
-        <div class="gate-container" role="radiogroup" :aria-label="$t('择一道途')">
+        <div class="gate-container" role="radiogroup" :aria-label="$t('择一去处')">
           <!-- 单机模式 -->
           <div
             class="gate-card"
@@ -125,14 +125,14 @@
         <div class="action-group">
           <button type="button" class="btn-primary" :disabled="!selectedMode" @click="startNewGame">
             <Sparkles :size="18" />
-            <span>{{ $t('初入仙途') }}</span>
+            <span>{{ $t('初入江湖') }}</span>
           </button>
           <button type="button" class="btn-secondary" @click="enterCharacterSelection">
             <History :size="18" />
-            <span>{{ $t('续前世因缘') }}</span>
+            <span>{{ $t('再续江湖缘') }}</span>
           </button>
         </div>
-        <p class="action-hint" :class="{ hidden: !!selectedMode }">{{ $t('择定道途后，即可初入仙途') }}</p>
+        <p class="action-hint" :class="{ hidden: !!selectedMode }">{{ $t('择定去处后，即可初入江湖') }}</p>
       </div>
     </main>
   </div>
