@@ -181,9 +181,9 @@ export function validateAndRepairNpcProfile(npcData: unknown, gameTime?: GameTim
     }
 
     try {
-      if (!repairedNpc.灵根) repairedNpc.灵根 = '五行杂灵根';
+      if (!repairedNpc.灵根) repairedNpc.灵根 = '五行杂脉';
     } catch (e) {
-      repairedNpc.灵根 = '五行杂灵根';
+      repairedNpc.灵根 = '五行杂脉';
     }
 
     try {
@@ -249,12 +249,12 @@ export function validateAndRepairNpcProfile(npcData: unknown, gameTime?: GameTim
 
     try {
       if (!repairedNpc.当前位置 || typeof repairedNpc.当前位置 !== 'object') {
-        repairedNpc.当前位置 = { 描述: '朝天大陆·无名之地' };
+        repairedNpc.当前位置 = { 描述: '中原·无名之地' };
       } else if (!(repairedNpc.当前位置 as any).描述) {
-        (repairedNpc.当前位置 as any).描述 = '朝天大陆·无名之地';
+        (repairedNpc.当前位置 as any).描述 = '中原·无名之地';
       }
     } catch (e) {
-      repairedNpc.当前位置 = { 描述: '朝天大陆·无名之地' };
+      repairedNpc.当前位置 = { 描述: '中原·无名之地' };
     }
 
     try {
