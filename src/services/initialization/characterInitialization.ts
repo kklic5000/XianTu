@@ -1022,7 +1022,7 @@ async function finalizeAndSyncData(saveData: SaveData, baseInfo: CharacterBaseIn
     if (desc.includes('·')) return desc;
     const continents = (saveData as any).世界?.信息?.大陆信息;
     const firstContinentName =
-      (Array.isArray(continents) && continents[0] && (continents[0].名称 || continents[0].name)) || '朝天大陆';
+      (Array.isArray(continents) && continents[0] && (continents[0].名称 || continents[0].name)) || '中原';
     return `${firstContinentName}·${desc}`;
   };
 
@@ -1044,7 +1044,7 @@ async function finalizeAndSyncData(saveData: SaveData, baseInfo: CharacterBaseIn
       return { 描述: desc, x, y };
     }
 
-    return { 描述: '朝天大陆·无名之地', x: 5000, y: 5000 };
+    return { 描述: '中原·无名之地', x: 5000, y: 5000 };
   };
 
   // 🔥 位置信息优先使用 AI 生成；若缺失/无效则兜底一个可用位置（避免创角直接失败）
