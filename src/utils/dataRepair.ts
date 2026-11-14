@@ -89,7 +89,7 @@ export function repairSaveData(saveData: SaveData | null | undefined): SaveData 
     if (!repaired.角色.位置 || typeof repaired.角色.位置 !== 'object') {
       repaired.角色.位置 = createDefaultLocation();
     } else if (!repaired.角色.位置.描述) {
-      repaired.角色.位置.描述 = '朝天大陆·无名之地';
+      repaired.角色.位置.描述 = '中原·无名之地';
     }
 
     // --- 效果 ---
@@ -545,9 +545,9 @@ function repairNpc(npc: NpcProfile): NpcProfile {
 
   // 修复位置
   if (!repaired.当前位置 || typeof repaired.当前位置 !== 'object') {
-    repaired.当前位置 = { 描述: '朝天大陆·无名之地' };
+    repaired.当前位置 = { 描述: '中原·无名之地' };
   } else if (!repaired.当前位置.描述) {
-    repaired.当前位置.描述 = '朝天大陆·无名之地';
+    repaired.当前位置.描述 = '中原·无名之地';
   }
 
   // 修复好感度
@@ -606,7 +606,7 @@ function createDefaultAttributes(): PlayerAttributes {
 }
 
 function createDefaultLocation(): PlayerLocation {
-  return { 描述: '朝天大陆·无名之地', x: 5000, y: 5000 } as PlayerLocation;
+  return { 描述: '中原·无名之地', x: 5000, y: 5000 } as PlayerLocation;
 }
 
 /**
@@ -636,10 +636,10 @@ function createMinimalSaveDataV3(): SaveData {
         性别: '男',
         出生日期: { 年: 982, 月: 1, 日: 1 },
         种族: '人族',
-        世界: '朝天大陆' as any,
+        世界: '中原' as any,
         天资: '凡人' as any,
         出生: '散修',
-        灵根: '五行杂灵根',
+        灵根: '五行杂脉',
         天赋: [],
         先天六司: { 根骨: 5, 灵性: 5, 悟性: 5, 气运: 5, 魅力: 5, 心性: 5 },
         后天六司: { 根骨: 0, 灵性: 0, 悟性: 0, 气运: 0, 魅力: 0, 心性: 0 },
@@ -667,7 +667,7 @@ function createMinimalSaveDataV3(): SaveData {
     },
     世界: {
       信息: {
-        世界名称: '朝天大陆',
+        世界名称: '中原',
         大陆信息: [],
         势力信息: [],
         地点信息: [],
