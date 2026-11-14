@@ -29,7 +29,7 @@
           <strong class="realm-name">{{ formatRealmDisplay(playerStatus?.境界) }}</strong>
           <span v-if="isRealmProgressAvailable && realmProgressPercent >= 100" class="realm-flag hot">{{ t('可突破') }}</span>
           <span v-else-if="isRealmProgressAvailable && realmProgressPercent >= 90" class="realm-flag warm">{{ t('可冲刺') }}</span>
-          <span v-else-if="!isRealmProgressAvailable" class="realm-wait">{{ t('等待仙缘') }}</span>
+          <span v-else-if="!isRealmProgressAvailable" class="realm-wait">{{ t('等待机缘') }}</span>
         </div>
       </section>
 
@@ -40,7 +40,7 @@
             <div class="gm-meter-row">
               <span>
                 <img class="status-icon-image" :src="v.icon" alt="" aria-hidden="true" draggable="false" />
-                {{ t(v.key) }}
+                {{ t(v.label ?? v.key) }}
               </span>
               <b :class="{ low: v.low }">{{ v.cur }}<i v-if="v.max"> / {{ v.max }}</i></b>
             </div>
@@ -208,8 +208,8 @@ const vitalRows = computed(() => {
   const s = playerStatus.value as any;
   const rows = [
     { key: '气血', icon: bloodIcon, tone: 'var(--gm-hp)', cur: Number(s?.气血?.当前 ?? 0), max: Number(s?.气血?.上限 ?? 0) },
-    { key: '灵气', icon: spiritIcon, tone: 'var(--gm-mp)', cur: Number(s?.灵气?.当前 ?? 0), max: Number(s?.灵气?.上限 ?? 0) },
-    { key: '神识', icon: senseIcon, tone: 'var(--gm-sense)', cur: Number(s?.神识?.当前 ?? 0), max: Number(s?.神识?.上限 ?? 0) },
+    { key: '灵气', label: '内力', icon: spiritIcon, tone: 'var(--gm-mp)', cur: Number(s?.灵气?.当前 ?? 0), max: Number(s?.灵气?.上限 ?? 0) },
+    { key: '神识', label: '感知', icon: senseIcon, tone: 'var(--gm-sense)', cur: Number(s?.神识?.当前 ?? 0), max: Number(s?.神识?.上限 ?? 0) },
     { key: '寿元', icon: lifespanIcon, tone: 'var(--gm-life)', cur: Number(currentAge.value ?? 0), max: Number(s?.寿命?.上限 ?? 0) },
   ];
   return rows.map((r) => {
@@ -262,8 +262,8 @@ const isRealmProgressAvailable = computed(() => {
 
 const realmWaitingText = computed(() => {
   const desc = playerStatus.value?.境界?.突破描述;
-  if (desc) return `${t('等待仙缘')} · ${desc}`;
-  return t('等待仙缘');
+  if (desc) return `${t('等待机缘')} · ${desc}`;
+  return t('等待机缘');
 });
 
 // 根据进度百分比返回CSS类名
