@@ -434,7 +434,7 @@
                   <dd>{{ getFieldName(detailsCharacter.角色.出生) }}</dd>
                 </div>
                 <div class="detail-item">
-                  <dt>{{ $t('灵根') }}</dt>
+                  <dt>{{ $t('武学资质') }}</dt>
                   <dd>{{ getFieldName(detailsCharacter.角色.灵根) }}</dd>
                 </div>
                 <div class="detail-item">
