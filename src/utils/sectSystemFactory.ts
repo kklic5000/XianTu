@@ -222,10 +222,10 @@ export function getSectThemeKeywords(sect: WorldFaction): string[] {
       keywords.push('剑修', '剑道', '剑意', '御剑');
       break;
     case 'alchemy':
-      keywords.push('丹道', '炼丹', '药材', '丹炉');
+      keywords.push('丹道', '炼药', '药材', '丹炉');
       break;
     case 'array':
-      keywords.push('阵法', '符箓', '灵纹', '阵盘');
+      keywords.push('阵法', '图谱', '灵纹', '阵盘');
       break;
     case 'demonic':
       keywords.push('魔道', '煞气', '血修', '邪功');
