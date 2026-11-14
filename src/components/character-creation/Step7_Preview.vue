@@ -139,8 +139,8 @@
         </article>
 
         <article class="fate-card">
-          <span class="fate-label">{{ $t('灵根') }}</span>
-          <h4 class="fate-name">{{ store.selectedSpiritRoot?.name || $t('随机灵根') }}</h4>
+          <span class="fate-label">{{ $t('武学资质') }}</span>
+          <h4 class="fate-name">{{ store.selectedSpiritRoot?.name || $t('随机武学资质') }}</h4>
           <p class="fate-desc">{{ store.selectedSpiritRoot?.description || $t('暂无描述') }}</p>
         </article>
 
