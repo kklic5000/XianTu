@@ -20,10 +20,10 @@
           <div class="banner-main">
             <p class="banner-label">
               主修功法
-              <SealBadge v-if="isCultivating(current)" tone="seal">修炼中</SealBadge>
+              <SealBadge v-if="isCultivating(current)" tone="seal">练功中</SealBadge>
             </p>
             <QualityText tag="h2" class="banner-name" :quality="current.品质">{{ current.名称 }}</QualityText>
-            <p class="banner-meta">{{ qualityLabel(current.品质) || '品阶不明' }} · 修炼进度 {{ progressOf(current) }}%</p>
+            <p class="banner-meta">{{ qualityLabel(current.品质) || '品阶不明' }} · 练功进度 {{ progressOf(current) }}%</p>
             <p class="banner-desc">{{ current.描述 || '暂无描述' }}</p>
             <ul v-if="flattenEffect(current.功法效果).length" class="effects">
               <li v-for="e in flattenEffect(current.功法效果)" :key="e" class="gm-chip">{{ e }}</li>
@@ -32,7 +32,7 @@
         </section>
 
         <div class="acts">
-          <button type="button" class="cc-btn primary" @click="notify('cultivate')"><Flame :size="15" /><span>修炼</span></button>
+          <button type="button" class="cc-btn primary" @click="notify('cultivate')"><Flame :size="15" /><span>练功</span></button>
           <button type="button" class="cc-btn" @click="notify('secluded_cultivation')"><Moon :size="15" /><span>闭关</span></button>
           <button type="button" class="cc-btn" @click="deepCultivate"><Hourglass :size="15" /><span>深修</span></button>
           <button v-if="progressOf(current) >= 100" type="button" class="cc-btn breakthrough" @click="notify('breakthrough')">
@@ -62,7 +62,7 @@
                 <p class="node-title">
                   <b>{{ sk.技能名称 }}</b>
                   <SealBadge v-if="isUnlocked(current, sk)" tone="good">已解锁</SealBadge>
-                  <SealBadge v-else tone="muted"><Lock :size="11" />修炼至 {{ sk.req }}%</SealBadge>
+                  <SealBadge v-else tone="muted"><Lock :size="11" />练功至 {{ sk.req }}%</SealBadge>
                 </p>
                 <p v-if="sk.技能描述" class="node-desc">{{ sk.技能描述 }}</p>
                 <p v-if="sk.消耗" class="node-cost">消耗 {{ sk.消耗 }}</p>
@@ -77,7 +77,7 @@
     <!-- 掌握技能 -->
     <ListDetail v-else-if="tab === 'skills'" class="tech-body" :open="!!selectedSkill && detailOpen" detail-label="技能详情" @close="detailOpen = false">
       <template #list>
-        <EmptyState v-if="!mastered.length" glyph="技" title="尚未掌握技能" desc="修炼功法达到熟练度要求后自动掌握" />
+        <EmptyState v-if="!mastered.length" glyph="技" title="尚未掌握技能" desc="练功达到熟练度要求后自动掌握" />
         <EmptyState v-else-if="!filteredSkills.length" glyph="寻" title="没有符合的技能" compact>
           <button type="button" class="cc-btn small" @click="query = ''">清除搜索</button>
         </EmptyState>
@@ -133,7 +133,7 @@
         <div v-if="selectedBook" class="book-detail">
           <div class="gm-detail-body">
             <QualityText tag="h2" class="gm-detail-name" :quality="selectedBook.品质">{{ selectedBook.名称 }}</QualityText>
-            <p class="d-meta">{{ qualityLabel(selectedBook.品质) || '品阶不明' }} · 修炼进度 {{ progressOf(selectedBook) }}%</p>
+            <p class="d-meta">{{ qualityLabel(selectedBook.品质) || '品阶不明' }} · 练功进度 {{ progressOf(selectedBook) }}%</p>
             <p class="gm-prose d-desc">{{ selectedBook.描述 || '暂无描述' }}</p>
             <section v-if="flattenEffect(selectedBook.功法效果).length" class="gm-section">
               <h4 class="gm-label">功法效果</h4>
@@ -199,7 +199,7 @@ const mastered = computed<any[]>(() => (Array.isArray(gs.masteredSkills) ? gs.ma
 
 const tab = ref<'practice' | 'skills' | 'library'>('practice');
 const tabs = computed(() => [
-  { key: 'practice', label: '修炼' },
+  { key: 'practice', label: '练功' },
   { key: 'skills', label: '掌握技能', count: mastered.value.length },
   { key: 'library', label: '功法库', count: books.value.length },
 ]);
