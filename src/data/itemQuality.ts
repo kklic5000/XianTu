@@ -45,27 +45,27 @@ export interface ItemQualitySystem {
 
 export const ITEM_QUALITY_SYSTEM: ItemQualitySystem = {
   qualities: {
-    神: { color: '#9932CC', rarity: '亘古未有，蕴含大道法则，三界之内绝无仅有之神物。' },
-    仙: { color: '#FFD700', rarity: '源自顶级仙家圣地，汇聚天地灵气，是修士梦寐以求的瑰宝。' },
-    天: { color: '#FF69B4', rarity: '由超级宗门或顶尖势力倾力打造，威能赫赫，足以镇压一方气运。' },
-    地: { color: '#00CED1', rarity: '产自大型地级宗门，材质与工艺俱佳，是修真界的中坚力量。' },
-    玄: { color: '#9370DB', rarity: '出自玄门修士之手，蕴含奇特功效，是行走江湖的必备秘宝。' },
-    黄: { color: '#DAA520', rarity: '修真界广泛流通的珍品，虽不顶尖，但已具备不凡效力。' },
-    凡: { color: '#808080', rarity: '世俗凡人所用之物，未入修行门槛，仅具基本功能。' },
+    神: { color: '#9932CC', rarity: '亘古未有，江湖传说中的绝世神物，百年难得一见。' },
+    仙: { color: '#FFD700', rarity: '源自武林圣地与宗师之手，汇聚天地灵气，是江湖人梦寐以求的瑰宝。' },
+    天: { color: '#FF69B4', rarity: '由顶尖门派或势力倾力打造，威能赫赫，足以镇压一方。' },
+    地: { color: '#00CED1', rarity: '产自大型门派，材质与工艺俱佳，是江湖中的中坚好物。' },
+    玄: { color: '#9370DB', rarity: '出自名家之手，蕴含奇特功效，是行走江湖的必备秘宝。' },
+    黄: { color: '#DAA520', rarity: '江湖上广泛流通的珍品，虽不顶尖，但已具备不凡效力。' },
+    凡: { color: '#808080', rarity: '市井百姓所用之物，平平无奇，仅具基本功能。' },
   },
 
   grades: {
-    0: { name: '残缺', description: '破损不堪', effect: '破损效果' },
-    1: { name: '下品', description: '品质一般', effect: '淡色光效' },
-    2: { name: '下品', description: '品质一般', effect: '淡色光效' },
-    3: { name: '下品', description: '品质一般', effect: '淡色光效' },
-    4: { name: '中品', description: '品质中等', effect: '中等光效' },
-    5: { name: '中品', description: '品质中等', effect: '中等光效' },
-    6: { name: '中品', description: '品质中等', effect: '中等光效' },
-    7: { name: '上品', description: '品质上乘', effect: '强烈光效' },
-    8: { name: '上品', description: '品质上乘', effect: '强烈光效' },
-    9: { name: '上品', description: '品质上乘', effect: '强烈光效' },
-    10: { name: '极品', description: '完美无瑕', effect: '炫目特效' },
+    0: { name: '粗制', description: '做工粗糙', effect: '破损效果' },
+    1: { name: '寻常', description: '品质一般', effect: '淡色光效' },
+    2: { name: '寻常', description: '品质一般', effect: '淡色光效' },
+    3: { name: '精良', description: '做工精良', effect: '淡色光效' },
+    4: { name: '精良', description: '做工精良', effect: '中等光效' },
+    5: { name: '上乘', description: '品质上乘', effect: '中等光效' },
+    6: { name: '上乘', description: '品质上乘', effect: '中等光效' },
+    7: { name: '珍稀', description: '珍稀难得', effect: '强烈光效' },
+    8: { name: '珍稀', description: '珍稀难得', effect: '强烈光效' },
+    9: { name: '秘制', description: '秘法所制', effect: '强烈光效' },
+    10: { name: '绝世', description: '完美无瑕', effect: '炫目特效' },
   },
 };
 
@@ -92,11 +92,13 @@ export function getItemColor(quality: QualityType, grade: GradeType): string {
 }
 
 export function getGradeRange(grade: number): string {
-  if (grade === 0) return '残缺';
-  if (grade >= 1 && grade <= 3) return '下品';
-  if (grade >= 4 && grade <= 6) return '中品';
-  if (grade >= 7 && grade <= 9) return '上品';
-  if (grade === 10) return '极品';
+  if (grade === 0) return '粗制';
+  if (grade >= 1 && grade <= 2) return '寻常';
+  if (grade >= 3 && grade <= 4) return '精良';
+  if (grade >= 5 && grade <= 6) return '上乘';
+  if (grade >= 7 && grade <= 8) return '珍稀';
+  if (grade === 9) return '秘制';
+  if (grade === 10) return '绝世';
   return '未知';
 }
 
