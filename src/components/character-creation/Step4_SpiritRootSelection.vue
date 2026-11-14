@@ -1,6 +1,6 @@
 <template>
   <div class="spirit-root-selection-container">
-    <div v-if="store.isLoading" class="cc-state">{{ $t('天地玄黄，探查灵根...') }}</div>
+    <div v-if="store.isLoading" class="cc-state">{{ $t('天地玄黄，探查武学资质...') }}</div>
     <div v-else-if="store.error" class="cc-state error">{{ $t('天机混沌：') }}{{ store.error }}</div>
 
     <div v-else class="cc-split">
@@ -27,7 +27,7 @@
               :class="{ active: selectionMode === 'preset' }"
               @click="selectionMode = 'preset'"
             >
-              {{ $t('预设灵根') }}
+              {{ $t('预设武学资质') }}
             </button>
             <button
               type="button"
@@ -56,7 +56,7 @@
             <div class="cc-item-main">
               <span class="random-name">
                 <Dices :size="15" class="random-icon" />
-                <span class="cc-item-name">{{ $t('随机灵根') }}</span>
+                <span class="cc-item-name">{{ $t('随机武学资质') }}</span>
               </span>
               <span class="cc-item-meta">{{ $t('0 点') }}</span>
             </div>
@@ -105,7 +105,7 @@
         <!-- 组合选择 -->
         <div v-if="selectionMode === 'custom'" class="custom-mode">
           <section class="selection-group">
-            <h3 class="cc-section-title">{{ $t('灵根类型') }}</h3>
+            <h3 class="cc-section-title">{{ $t('武学资质类型') }}</h3>
             <div class="element-grid">
               <button
                 v-for="type in spiritRootTypes"
@@ -125,7 +125,7 @@
           </section>
 
           <section class="selection-group">
-            <h3 class="cc-section-title">{{ $t('灵根品级') }}</h3>
+            <h3 class="cc-section-title">{{ $t('武学资质品级') }}</h3>
             <div class="grade-grid">
               <button
                 v-for="tier in spiritRootTiers"
@@ -189,14 +189,14 @@
             <span class="cc-stat">{{ $t('消耗天道点') }} <strong>{{ getActiveCost() }}</strong></span>
           </div>
         </div>
-        <div v-else class="cc-placeholder">{{ $t('请选择一种灵根，或听天由命。') }}</div>
+        <div v-else class="cc-placeholder">{{ $t('请选择一种武学资质，或听天由命。') }}</div>
       </div>
     </div>
 
     <!-- 高级自定义模态框 -->
     <CustomCreationModal
       :visible="isAdvancedCustomVisible"
-      :title="$t('高级自定义灵根')"
+      :title="$t('高级自定义武学资质')"
       :fields="advancedCustomFields"
       :validationFn="validateAdvancedCustom"
       @close="isAdvancedCustomVisible = false"
@@ -206,7 +206,7 @@
     <!-- 编辑模态框 -->
     <CustomCreationModal
       :visible="isEditModalVisible"
-      :title="$t('编辑灵根')"
+      :title="$t('编辑武学资质')"
       :fields="advancedCustomFields"
       :validationFn="validateAdvancedCustom"
       :initialData="editInitialData"
@@ -288,7 +288,7 @@ const spiritRootTypes = [
 
 // 灵根品级配置 - 完整的修仙品级体系
 const spiritRootTiers = [
-  { key: 'common', name: '凡品', multiplier: 1.0, cost: 0, desc: '平平无奇的普通灵根' },
+  { key: 'common', name: '凡品', multiplier: 1.0, cost: 0, desc: '平平无奇的普通资质' },
   { key: 'low', name: '下品', multiplier: 1.1, cost: 3, desc: '略有天赋，勉强可用' },
   { key: 'middle', name: '中品', multiplier: 1.3, cost: 6, desc: '资质尚可，小有成就' },
   { key: 'high', name: '上品', multiplier: 1.6, cost: 10, desc: '天赋卓越，前途无量' },
@@ -313,7 +313,7 @@ const filteredSpiritRoots = computed(() => {
 // 高级自定义字段 - 使用动态列表格式
 // 根据 types/index.ts 中的 SpiritRoot 接口定义字段
 const advancedCustomFields: readonly ModalField[] = [
-  { key: 'name', label: '灵根名称', type: 'text', placeholder: '例如：混沌灵根' },
+  { key: 'name', label: '灵根名称', type: 'text', placeholder: '例如：混元之体' },
   { key: 'tier', label: '品级', type: 'select', options: spiritRootTiers.map(t => ({ value: t.key, label: t.name })) },
   { key: 'description', label: '灵根描述', type: 'textarea', placeholder: '描述这个灵根的特性和背景故事...' },
   { key: 'cultivation_speed', label: '修炼速度', type: 'text', placeholder: '例如：极快、快速、普通、缓慢' },
