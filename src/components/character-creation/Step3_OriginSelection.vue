@@ -176,7 +176,7 @@ const filteredOrigins = computed(() => {
 // 先天属性选项 - 出身影响的是先天属性
 const _attributeOptions = [
   { value: 'root_bone', label: '先天根骨' },
-  { value: 'spirit', label: '先天灵性' },
+  { value: 'spirit', label: '先天经脉' },
   { value: 'comprehension', label: '先天悟性' },
   { value: 'luck', label: '先天气运' },
   { value: 'charm', label: '先天魅力' },
@@ -215,11 +215,11 @@ const customOriginFields: ModalField[] = [
         type: 'select',
         options: [
           { value: '根骨', label: '根骨' },
-          { value: '灵性', label: '灵性' },
+          { value: '灵性', label: '经脉' },
           { value: '悟性', label: '悟性' },
-          { value: '气运', label: '气运' },
+          { value: '气运', label: '福缘' },
           { value: '魅力', label: '魅力' },
-          { value: '心性', label: '心性' }
+          { value: '心性', label: '定力' }
         ]
       },
       { key: 'value', placeholder: '修正值（可为负数）', type: 'text' }
