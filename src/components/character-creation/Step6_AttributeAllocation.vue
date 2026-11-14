@@ -89,11 +89,11 @@ const maxValue = 10 // 属性最大值
 
 const attributeNames = {
   root_bone: '根骨',
-  spirituality: '灵性',
+  spirituality: '经脉',
   comprehension: '悟性',
-  fortune: '气运',
+  fortune: '福缘',
   charm: '魅力',
-  temperament: '心性',
+  temperament: '定力',
 }
 
 const attributeIcons = {
