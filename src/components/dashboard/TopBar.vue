@@ -30,7 +30,7 @@
         <template v-if="spiritDensity > 0">
           <i class="tb-dot" aria-hidden="true"></i>
           <span class="tb-item tb-spirit" :class="spiritDensityClass" :title="spiritDensityTooltip">
-            <span class="tb-spirit-label">{{ t('灵气') }}</span>
+            <span class="tb-spirit-label">{{ t('地气') }}</span>
             <span class="beads" aria-hidden="true">
               <i v-for="n in 5" :key="n" :class="{ on: spiritDensity >= n * 20 - 10 }"></i>
             </span>
@@ -158,11 +158,11 @@ const spiritWord = computed(() => {
 
 const spiritDensityTooltip = computed(() => {
   const density = spiritDensity.value
-  if (density >= 80) return t('灵气充沛 - 极佳修炼环境')
-  if (density >= 60) return t('灵气浓郁 - 良好修炼环境')
-  if (density >= 40) return t('灵气适中 - 普通修炼环境')
-  if (density >= 20) return t('灵气稀薄 - 修炼困难')
-  return t('灵气枯竭 - 难以修炼')
+  if (density >= 80) return t('地气充盈 - 绝佳练功环境')
+  if (density >= 60) return t('地气丰厚 - 良好练功环境')
+  if (density >= 40) return t('地气平平 - 普通练功环境')
+  if (density >= 20) return t('地气稀薄 - 练功不易')
+  return t('地气枯竭 - 难以练功')
 })
 
 const gameTime = computed(() => {
