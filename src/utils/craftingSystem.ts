@@ -50,7 +50,10 @@ export interface CraftingComputationResult {
   daoBonusStage: number;
 }
 
-const QUALITY_ORDER: QualityType[] = ['凡', '黄', '玄', '地', '天', '仙', '神'];
+const QUALITY_ORDER: QualityType[] = ['凡', '良', '上', '珍', '秘', '绝'];
+
+/** 旧品阶字 → 新品阶（旧存档物品计分用） */
+const QUALITY_ALIAS: Record<string, QualityType> = { 黄: '良', 玄: '上', 地: '珍', 天: '秘', 仙: '秘', 神: '绝', 圣: '绝', 道: '绝' };
 
 function clampInt(value: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, Math.round(value)));
@@ -66,7 +69,8 @@ function toGradeNumber(grade: unknown): number {
 }
 
 export function getItemQualityScore(item: Item): number {
-  const quality = item.品质?.quality ?? '凡';
+  const rawQuality = item.品质?.quality ?? '凡';
+  const quality = QUALITY_ALIAS[rawQuality] ?? rawQuality;
   const grade = toGradeNumber(item.品质?.grade);
   const rank = Math.max(1, QUALITY_ORDER.indexOf(quality) + 1);
   const normalizedGrade = Math.max(0, Math.min(10, grade)) / 10;
