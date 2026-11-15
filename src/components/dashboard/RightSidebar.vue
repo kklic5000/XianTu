@@ -208,8 +208,8 @@ const vitalRows = computed(() => {
   const s = playerStatus.value as any;
   const rows = [
     { key: '气血', icon: bloodIcon, tone: 'var(--gm-hp)', cur: Number(s?.气血?.当前 ?? 0), max: Number(s?.气血?.上限 ?? 0) },
-    { key: '灵气', label: '内力', icon: spiritIcon, tone: 'var(--gm-mp)', cur: Number(s?.灵气?.当前 ?? 0), max: Number(s?.灵气?.上限 ?? 0) },
-    { key: '神识', label: '感知', icon: senseIcon, tone: 'var(--gm-sense)', cur: Number(s?.神识?.当前 ?? 0), max: Number(s?.神识?.上限 ?? 0) },
+    { key: '灵气', label: '内力', icon: spiritIcon, tone: 'var(--gm-mp)', cur: Number(s?.内力?.当前 ?? s?.灵气?.当前 ?? 0), max: Number(s?.内力?.上限 ?? s?.灵气?.上限 ?? 0) },
+    { key: '神识', label: '感知', icon: senseIcon, tone: 'var(--gm-sense)', cur: Number(s?.感知?.当前 ?? s?.神识?.当前 ?? 0), max: Number(s?.感知?.上限 ?? s?.神识?.上限 ?? 0) },
     { key: '寿元', icon: lifespanIcon, tone: 'var(--gm-life)', cur: Number(currentAge.value ?? 0), max: Number(s?.寿命?.上限 ?? 0) },
   ];
   return rows.map((r) => {
@@ -277,7 +277,8 @@ const getRealmProgressClass = (): string => {
 // 计算生命体征百分比
 const getVitalPercent = (type: '气血' | '灵气' | '神识') => {
   if (!gameStateStore.attributes) return 0;
-  const vital = (gameStateStore.attributes as any)[type];
+  const alias = type === '灵气' ? '内力' : type === '神识' ? '感知' : null;
+  const vital = (alias && (gameStateStore.attributes as any)[alias]) || (gameStateStore.attributes as any)[type];
   if (!vital?.当前 || !vital?.上限) return 0;
   return Math.round((vital.当前 / vital.上限) * 100);
 };
