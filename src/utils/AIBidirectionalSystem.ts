@@ -1328,6 +1328,58 @@ ${step1Text}
     }
 
 
+    // 金庸模式：招式消耗强制结算。叙事中出现已掌握招式名时，按其消耗定义自动扣减资源池，
+    // 不再单靠 AI 自觉下指令；AI 本回合已扣过的池子不重复扣。精力/体力无对应资源池，一律记内力。
+    try {
+      const narrative = typeof (response as any).text === 'string' ? (response as any).text : '';
+      const attrs: any = (saveData as any).角色?.属性 ?? {};
+      if (narrative) {
+        const poolOf = (name: string): string => (name === '气血' ? '气血' : name === '感知' || name === '神识' ? '感知' : '内力');
+        const poolObj = (pool: string): any => attrs[pool] ?? (pool === '内力' ? attrs.灵气 : pool === '感知' ? attrs.神识 : undefined);
+        const poolKey = (pool: string): string => (attrs[pool] ? pool : pool === '内力' ? '灵气' : pool === '感知' ? '神识' : pool);
+        const skills: Array<{ name: string; cost: string }> = [];
+        const seenSkill = new Set<string>();
+        const pushSkill = (name: unknown, cost: unknown) => {
+          if (typeof name === 'string' && name && typeof cost === 'string' && cost && !seenSkill.has(name)) {
+            seenSkill.add(name);
+            skills.push({ name, cost });
+          }
+        };
+        for (const s of ((saveData as any).角色?.技能?.掌握技能 ?? []) as any[]) pushSkill(s?.技能名称, s?.消耗);
+        const invItems: any = (saveData as any).角色?.背包?.物品 ?? {};
+        for (const it of Object.values(invItems)) {
+          if ((it as any)?.类型 === '功法') for (const sk of ((it as any).功法技能 ?? []) as any[]) pushSkill(sk?.技能名称, sk?.消耗);
+        }
+        const existing: any[] = Array.isArray(response.tavern_commands) ? response.tavern_commands : [];
+        const deducted = new Set<string>();
+        for (const c of existing) {
+          if (c?.action === 'add' && typeof c?.key === 'string' && typeof c?.value === 'number' && c.value < 0) {
+            const m = c.key.match(/^角色\.属性\.(气血|内力|灵气|感知|神识)\.当前$/);
+            if (m) deducted.add(m[1] === '灵气' ? '内力' : m[1] === '神识' ? '感知' : m[1]);
+          }
+        }
+        const autoCmds: any[] = [];
+        for (const sk of skills) {
+          if (!narrative.includes(sk.name)) continue;
+          const pairs = [...sk.cost.matchAll(/(内力|精力|体力|灵气|气血|感知|神识)\s*(\d+(?:\.\d+)?)\s*%/g)];
+          for (const pair of pairs) {
+            const pool = poolOf(pair[1]);
+            if (deducted.has(pool)) continue;
+            const max = Number(poolObj(pool)?.上限) || 0;
+            const pct = Number(pair[2]);
+            if (!max || !(pct > 0)) continue;
+            const amount = Math.max(1, Math.round((max * pct) / 100));
+            autoCmds.push({ action: 'add', key: `角色.属性.${poolKey(pool)}.当前`, value: -amount });
+            deducted.add(pool);
+            console.warn(`[AI双向系统] 招式消耗结算: ${sk.name} 消耗${pair[1]}${pct}% -> ${poolKey(pool)} -${amount}`);
+          }
+        }
+        if (autoCmds.length) response.tavern_commands = [...existing, ...autoCmds];
+      }
+    } catch (e) {
+      console.warn('[AI双向系统] 招式消耗结算失败（忽略）:', e);
+    }
+
     if (!response.tavern_commands?.length) {
       return { saveData, stateChanges: { changes, timestamp: new Date().toISOString() } };
     }
