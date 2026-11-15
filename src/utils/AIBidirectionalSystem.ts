@@ -1390,6 +1390,52 @@ ${step1Text}
     // 🔥 新增：预处理指令以修复常见的AI错误
     const preprocessedCommands = this._preprocessCommands(response.tavern_commands);
 
+    // 金庸模式：资源池回复钳制。禁止 AI 用 set/add 在一回合内把气血/内力/感知当前值大幅回满；
+    // 单回合回复上限为该池上限的20%（休息/调息/丹药的合理量）。同回合提升了该池上限（突破）时豁免。
+    try {
+      const attrs: any = (saveData as any).角色?.属性 ?? {};
+      const canonPool = (k: string): string => (k === '灵气' ? '内力' : k === '神识' ? '感知' : k);
+      const capRaised = new Set<string>();
+      for (const c of preprocessedCommands as any[]) {
+        const m = typeof c?.key === 'string' && (c.key as string).match(/^角色\.属性\.(气血|内力|灵气|感知|神识)\.上限$/);
+        if (m && (c.action === 'set' || (c.action === 'add' && typeof c.value === 'number' && c.value > 0))) capRaised.add(canonPool(m[1]));
+      }
+      const running = new Map<string, number>();
+      const startVal = new Map<string, number>();
+      for (const c of preprocessedCommands as any[]) {
+        if (!c || typeof c.key !== 'string') continue;
+        const m = (c.key as string).match(/^角色\.属性\.(气血|内力|灵气|感知|神识)\.当前$/);
+        if (!m) continue;
+        if (capRaised.has(canonPool(m[1]))) continue;
+        const pool: any = attrs[m[1]];
+        const cur = Number(pool?.当前);
+        const max = Number(pool?.上限);
+        if (!Number.isFinite(cur) || !Number.isFinite(max) || max <= 0) continue;
+        if (!running.has(m[1])) {
+          running.set(m[1], cur);
+          startVal.set(m[1], cur);
+        }
+        const allowanceTop = (startVal.get(m[1]) as number) + Math.max(1, Math.ceil(max * 0.2));
+        const run = running.get(m[1]) as number;
+        if (c.action === 'add' && typeof c.value === 'number') {
+          if (run + c.value > allowanceTop) {
+            const nv = Math.max(0, allowanceTop - run);
+            console.warn(`[AI双向系统] 回复钳制: ${c.key} add ${c.value} -> ${nv}`);
+            c.value = nv;
+          }
+          running.set(m[1], run + c.value);
+        } else if (c.action === 'set' && typeof c.value === 'number') {
+          if (c.value > allowanceTop) {
+            console.warn(`[AI双向系统] 回复钳制: ${c.key} set ${c.value} -> ${allowanceTop}`);
+            c.value = allowanceTop;
+          }
+          running.set(m[1], c.value);
+        }
+      }
+    } catch (e) {
+      console.warn('[AI双向系统] 回复钳制失败（忽略）:', e);
+    }
+
     // 🔥 步骤1：指令格式校验（路径/字段/只读保护） + 指令值校验（结构完整性）
     // 重要：两者都通过的指令才允许执行，避免“只校验但仍执行”的漏网风险
     const validCommands: TavernCommand[] = [];
