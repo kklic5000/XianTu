@@ -3,6 +3,18 @@
  */
 import { openDB, DBSchema, IDBPDatabase } from 'idb';
 import { getSystemPrompts, PROMPT_CATEGORIES } from './defaultPrompts';
+import { JINYONG_PROMPTS } from './jinyongPrompts';
+
+/** 金庸烘焙提示词的内容指纹：内容一变，指纹就变 */
+let jinyongPromptsStampCache: string | null = null;
+function jinyongPromptsStamp(): string {
+  if (jinyongPromptsStampCache) return jinyongPromptsStampCache;
+  const s = JSON.stringify(JINYONG_PROMPTS);
+  let h = 5381;
+  for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) | 0;
+  jinyongPromptsStampCache = `jy-${(h >>> 0).toString(36)}-${s.length}`;
+  return jinyongPromptsStampCache;
+}
 import { fetchRemotePromptConfig, getPromptWithRemoteOverride, getRemotePromptEnabled } from './promptConfig';
 import type { PromptDefinition } from './defaultPrompts';
 
@@ -73,6 +85,17 @@ class PromptStorage {
           }
         }
       });
+    }
+    // 金庸模式一次性迁移：烘焙提示词内容变更后，清掉浏览器里旧的已保存提示词副本，
+    // 让新默认（含练功节奏等调整）真正生效；只清提示词存储，不碰角色与存档。
+    try {
+      const stamp = jinyongPromptsStamp();
+      if (localStorage.getItem('jinyongPromptsStamp') !== stamp) {
+        await this.db.clear('prompts');
+        localStorage.setItem('jinyongPromptsStamp', stamp);
+      }
+    } catch {
+      // 迁移失败不阻塞游戏，继续使用既有提示词
     }
     // 远程配置是增强项，失败时继续使用本地默认值；只发起一次，避免每个提示词重复请求。
     if (!this.remoteConfigPromise) {
