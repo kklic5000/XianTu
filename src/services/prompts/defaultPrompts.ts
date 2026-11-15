@@ -388,10 +388,10 @@ export function getSystemPrompts(): Record<string, PromptDefinition> {
       name: '2.5 扩展规则',
       content: EXTENDED_BUSINESS_RULES,
       category: 'coreRequest',
-      description: '宗门、修炼速度、六司、NPC关系网、经济定价（默认关闭，开启后每次请求约多 3 千字）',
+      description: '宗门、修炼速度、六司、NPC关系网、经济定价（每次请求约多 3 千字）',
       order: 2.5,
       weight: 5,
-      defaultEnabled: false
+      defaultEnabled: true
     },
     dataDefinitions: {
       name: '3. 数据结构',
