@@ -46,8 +46,8 @@ const costBy = (current: number, percent: number) => Math.max(0, Math.min(curren
 
 export function resourcePlan(p: Pick<CraftParams, 'manaPercent' | 'spiritPercent' | 'formation'>): CraftingResourcePlan {
   const attrs = useGameStateStore().attributes as any;
-  const mana = Math.max(0, Number(attrs?.灵气?.当前) || 0);
-  const spirit = Math.max(0, Number(attrs?.神识?.当前) || 0);
+  const mana = Math.max(0, Number(attrs?.内力?.当前 ?? attrs?.灵气?.当前) || 0);
+  const spirit = Math.max(0, Number(attrs?.感知?.当前 ?? attrs?.神识?.当前) || 0);
   const mBase = costBy(mana, p.manaPercent);
   const mExtra = costBy(mana, p.formation.extraManaPercent);
   const sBase = costBy(spirit, p.spiritPercent);
@@ -207,9 +207,10 @@ export async function craft(p: CraftParams, overrideRate?: number): Promise<Craf
   inv.物品[item.物品ID] = item;
   gs.updateState('inventory', inv);
 
-  // 扣灵气 / 神识（基础 + 阵法额外）
-  gs.updateState('attributes.灵气.当前', Math.max(0, plan.灵气.当前 - plan.灵气.总消耗));
-  gs.updateState('attributes.神识.当前', Math.max(0, plan.神识.当前 - plan.神识.总消耗));
+  // 扣灵气 / 神识（基础 + 阵法额外）；金庸模式优先扣内力 / 感知池
+  const attrsNow: any = (gs as any).attributes ?? {};
+  gs.updateState(attrsNow?.内力 ? 'attributes.内力.当前' : 'attributes.灵气.当前', Math.max(0, plan.灵气.当前 - plan.灵气.总消耗));
+  gs.updateState(attrsNow?.感知 ? 'attributes.感知.当前' : 'attributes.神识.当前', Math.max(0, plan.神识.当前 - plan.神识.总消耗));
 
   // 事件记录
   const names = snaps.map((m) => m.名称).join('、') || '（无）';
