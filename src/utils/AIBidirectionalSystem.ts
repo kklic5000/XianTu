@@ -2204,6 +2204,43 @@ ${saveDataJson}`, role: 'system', depth: 4, position: 'in_chat' },
       out.push(cmd);
     }
 
+    // 金庸模式·写实苦修硬上限：不依赖 AI 自律，单回合（一次响应）内对练功增益做总量钳制。
+    // 只钳 add 的正向增量；负向（倒退/受伤）与 set 不受影响。
+    {
+      const PROF_PER_TECHNIQUE = 3; // 单门武功熟练度单回合上限（闭关档）
+      const PROF_TOTAL = 5; // 全部武功熟练度单回合总上限
+      const REALM_PROGRESS = 10; // 境界进度单回合上限
+      const ITEM_PROGRESS = 5; // 物品修炼进度（镜像）单回合上限
+      let profTotal = 0;
+      const profByKey = new Map<string, number>();
+      const realmByKey = new Map<string, number>();
+      const itemByKey = new Map<string, number>();
+      const clampAdd = (cmd: any, capMap: Map<string, number>, cap: number) => {
+        const used = capMap.get(cmd.key) || 0;
+        const allowance = Math.max(0, cap - used);
+        if (cmd.value > allowance) {
+          console.warn(`[AI双向系统] 写实苦修钳制: ${cmd.key} add ${cmd.value} -> ${allowance}`);
+          cmd.value = allowance;
+        }
+        capMap.set(cmd.key, used + cmd.value);
+      };
+      for (const cmd of out) {
+        if (!cmd || cmd.action !== 'add' || typeof cmd.key !== 'string' || typeof cmd.value !== 'number' || !(cmd.value > 0)) continue;
+        if (/^角色\.功法\.功法进度\..+\.熟练度$/.test(cmd.key)) {
+          clampAdd(cmd, profByKey, PROF_PER_TECHNIQUE);
+          if (cmd.value > 0) {
+            const allowance = Math.max(0, PROF_TOTAL - profTotal);
+            if (cmd.value > allowance) cmd.value = allowance;
+            profTotal += cmd.value;
+          }
+        } else if (cmd.key === '角色.属性.境界.当前进度') {
+          clampAdd(cmd, realmByKey, REALM_PROGRESS);
+        } else if (/^角色\.背包\.物品\..+\.修炼进度$/.test(cmd.key)) {
+          clampAdd(cmd, itemByKey, ITEM_PROGRESS);
+        }
+      }
+    }
+
     return out;
   }
 
