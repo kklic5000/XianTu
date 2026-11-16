@@ -138,6 +138,19 @@ export function repairSaveData(saveData: SaveData | null | undefined): SaveData 
     // --- 背包.货币（新货币系统，兼容旧存档） ---
     normalizeBackpackCurrencies(repaired.角色.背包 as any);
 
+    // --- 装备槽位悬空引用清理（物品被删除/耗尽后槽位仍指向它，会让装备计数虚满）---
+    if (repaired.角色.装备 && typeof repaired.角色.装备 === 'object') {
+      const validIds = (repaired.角色.背包.物品 ?? {}) as Record<string, unknown>;
+      for (let i = 1; i <= 6; i++) {
+        const key = `装备${i}`;
+        const v = (repaired.角色.装备 as any)[key];
+        if (typeof v === 'string' && v && !(v in validIds)) {
+          console.warn(`[数据修复] 清理悬空装备引用: ${key} -> ${v}`);
+          (repaired.角色.装备 as any)[key] = null;
+        }
+      }
+    }
+
     // --- 社交.关系 ---
     const playerName = typeof repaired.角色?.身份?.名字 === 'string' ? repaired.角色.身份.名字.trim() : '';
     if (!repaired.社交 || typeof repaired.社交 !== 'object') repaired.社交 = createMinimalSaveDataV3().社交;
