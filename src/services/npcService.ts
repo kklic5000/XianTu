@@ -177,7 +177,7 @@ export async function exportNpcToWorldbook(npc: NpcProfile) {
   const lines: string[] = [`# ${npc.名字}`, '', '**基础档案**'];
   lines.push(`- 性别：${npc.性别 || '未知'}`, `- 种族：${npc.种族 || '未知'}`);
   if (npc.出生日期) lines.push(`- 出生日期：${npc.出生日期.年}年${npc.出生日期.月}月${npc.出生日期.日}日`);
-  lines.push(`- 境界：${formatRealmWithStage(npc.境界)}`, `- 灵根：${nameOf(npc.灵根) || '未知'}`);
+  lines.push(`- 武学层级：${formatRealmWithStage(npc.武学层级 ?? npc.境界)}`, `- 灵根：${nameOf(npc.灵根) || '未知'}`);
   if (npc.势力归属) lines.push(`- 势力：${npc.势力归属}`);
   if (npc.出生) lines.push(`- 出生：${nameOf(npc.出生)}`);
   if (npc.当前位置?.描述) lines.push(`- 当前位置：${npc.当前位置.描述}`);
