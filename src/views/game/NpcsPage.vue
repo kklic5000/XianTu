@@ -45,7 +45,7 @@
                   <span class="gm-disc" :style="{ '--tone': favorInfo(npc.好感度).tone }">{{ npc.名字.charAt(0) }}</span>
                   <span class="gm-row-main">
                     <span class="gm-row-title">{{ npc.名字 }}</span>
-                    <span class="gm-row-sub">{{ formatRealmWithStage(npc.境界) }} · {{ npc.与玩家关系 || '相识' }}</span>
+                    <span class="gm-row-sub">{{ formatRealmWithStage(npcRealm(npc)) }} · {{ npc.与玩家关系 || '相识' }}</span>
                   </span>
                   <span class="favor-mini" :title="`好感 ${npc.好感度 ?? 0}（${favorInfo(npc.好感度).label}）`">
                     <b :style="{ color: favorInfo(npc.好感度).tone }">{{ npc.好感度 ?? 0 }}</b>
@@ -75,7 +75,7 @@
             <span class="gm-disc lg" :style="{ '--tone': favorInfo(selected.好感度).tone }">{{ selected.名字.charAt(0) }}</span>
             <div class="nd-id">
               <h2 class="gm-detail-name">{{ selected.名字 }}</h2>
-              <p class="nd-sub">{{ formatRealmWithStage(selected.境界) }} · {{ selected.与玩家关系 || '相识' }}</p>
+              <p class="nd-sub">{{ formatRealmWithStage(npcRealm(selected)) }} · {{ selected.与玩家关系 || '相识' }}</p>
             </div>
           </header>
 
@@ -136,7 +136,7 @@
             <!-- 属性 -->
             <template v-else-if="tab === 'attrs'">
               <dl class="gm-kv nd-kv">
-                <dt>境界</dt><dd>{{ formatRealmWithStage(selected.境界) }}</dd>
+                <dt>武学层级</dt><dd>{{ formatRealmWithStage(npcRealm(selected)) }}</dd>
                 <dt>灵根</dt>
                 <dd :style="{ color: qualityTone(formatSpiritRoot(selected.灵根).grade) }">
                   {{ formatSpiritRoot(selected.灵根).name }}<template v-if="formatSpiritRoot(selected.灵根).grade"> · {{ formatSpiritRoot(selected.灵根).grade }}</template>
@@ -319,11 +319,17 @@ const filters = computed(() => [
 
 const relationOptions = computed(() => [...new Set(allNpcs.value.map((n) => n.与玩家关系).filter(Boolean))]);
 
-const REALM_ORDER = ['凡人', '练气', '筑基', '金丹', '元婴', '化神', '炼虚', '合体', '渡劫', '大乘', '真仙'];
+// NPC 真实修为在「武学层级」栏位（金庸版 AI 写入），旧「境界」栏位已冻结为凡人，仅作兜底
+const npcRealm = (n: NpcProfile) => n.武学层级 ?? n.境界;
+const REALM_ORDER = ['凡人', '不入流', '三流', '二流', '一流', '绝顶', '宗师'];
+const STAGE_ORDER = ['', '初期', '中期', '后期', '圆满'];
 const realmRank = (n: NpcProfile) => {
-  const name = String((n.境界 as any)?.名称 ?? n.境界 ?? '');
-  const i = REALM_ORDER.findIndex((r) => name.includes(r));
-  return i < 0 ? -1 : i;
+  const r = npcRealm(n) as any;
+  const name = String(r?.名称 ?? r ?? '');
+  const stage = String(r?.阶段 ?? '');
+  const i = REALM_ORDER.findIndex((x) => name.includes(x));
+  const s = STAGE_ORDER.findIndex((x) => stage.includes(x));
+  return (i < 0 ? -1 : i) * 10 + (s < 0 ? 0 : s);
 };
 
 const list = computed(() => {
