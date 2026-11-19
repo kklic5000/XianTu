@@ -993,6 +993,7 @@ export interface NpcProfile {
 
   // === 修炼属性 ===
   境界: Realm;
+  武学层级?: { 名称: string; 阶段?: string }; // 金庸版 NPC 的真实修为栏位（AI 写入此栏，页面优先显示）
   灵根: CharacterBaseInfo['灵根'];
   天赋: CharacterBaseInfo['天赋']; // 天赋列表
   先天六司: InnateAttributes; // NPC只有一个六司字段，不分先天/最终
