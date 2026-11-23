@@ -66,30 +66,40 @@ export const LOCAL_TALENT_TIERS: Omit<TalentTier, 'source'>[] = [
 //                           本地出身数据（武侠版）
 // =======================================================================
 export const LOCAL_ORIGINS: Omit<Origin, 'source'>[] = [
-  { id: 1, name: "山野遗孤", description: "自幼在山野中长大，与猛兽为伴，磨练出坚韧的意志和过人的体魄。", talent_cost: 0, attribute_modifiers: { root_bone: 1 }, rarity: 3 },
-  { id: 2, name: "书香门第", description: "出身于官宦世家，饱读诗书，对世事至理有超乎常人的理解力。", talent_cost: 2, attribute_modifiers: { comprehension: 2 }, rarity: 3 },
-  { id: 3, name: "商贾之子", description: "生于富贵之家，精通人情世故，处事圆滑，魅力非凡。", talent_cost: 2, attribute_modifiers: { charm: 2 }, rarity: 3 },
-  { id: 4, name: "将门之后", description: "名将的后代，血脉中流淌着勇武与煞气，心性坚定。", talent_cost: 3, attribute_modifiers: { temperament: 2, root_bone: 1 }, rarity: 3 },
-  { id: 5, name: "独行客传人", description: "你的师父是一位游戏风尘的江湖独行客，你继承了他的部分衣钵和见识。", talent_cost: 4, attribute_modifiers: { comprehension: 1, temperament: 1 }, rarity: 4 },
-  { id: 6, name: "邪派卧底", description: "你出身名门正派，却被派往邪派执行卧底任务，心性远超常人。", talent_cost: 1, attribute_modifiers: { temperament: 3 }, rarity: 4 },
-  { id: 7, name: "重生者", description: "你保留着前世的记忆，虽然修为尽失，但对功法和未来的大事了如指掌。", talent_cost: 5, attribute_modifiers: { comprehension: 2, luck: 1 }, rarity: 5 },
-  { id: 8, name: "名宿后裔", description: "你的血脉中流淌着武林名宿的传承，天生经脉灵性十足，练功速度略快于常人。", talent_cost: 6, attribute_modifiers: { spirit: 2, root_bone: 1 }, rarity: 5 },
-  { id: 9, name: "老怪传功", description: "你本是将死之人，却遇一位行将就木的江湖老怪，将毕生经验与见识倾囊相授。魂魄未换，阅历陡增。", talent_cost: 7, attribute_modifiers: { comprehension: 3, temperament: -1 }, rarity: 5 },
-  { id: 10, name: "山神庙祝", description: "你从小在山神庙长大，日夜与香火为伴，心神受到滋养，对山野传说与祭祀之事有特殊感应。", talent_cost: 2, attribute_modifiers: { spirit: 2 }, rarity: 3 },
-  { id: 11, name: "渔家少年", description: "常年在江河湖海中讨生活，水性极佳，体魄强健。", talent_cost: 1, attribute_modifiers: { root_bone: 2 }, rarity: 2 },
-  { id: 12, name: "王朝皇子", description: "生于凡人王朝的权力之巅，自幼享受锦衣玉食和最好的教育，但与武林的接触较少。", talent_cost: 3, attribute_modifiers: { charm: 2, temperament: 1 }, rarity: 4 },
-  { id: 13, name: "药童出身", description: "自幼在药房长大，日夜与药材为伴，对药理有超常的敏感。", talent_cost: 2, attribute_modifiers: { spirit: 1, comprehension: 1 }, rarity: 3 },
-  { id: 14, name: "阵法学徒", description: "师从阵法大师，自小研习阵法纹路，对方位距离的感知极其敏锐。", talent_cost: 3, attribute_modifiers: { comprehension: 2, spirit: 1 }, rarity: 4 },
-  { id: 15, name: "猎户世家", description: "祖上世代以狩猎猛兽为生，体魄强健，对野兽的气息与动静极其敏感。", talent_cost: 4, attribute_modifiers: { root_bone: 2, temperament: 1 }, rarity: 4 },
-  { id: 16, name: "流浪乞丐", description: "自幼流落街头，饱经风霜，磨练出超凡的意志和适应能力。", talent_cost: -1, attribute_modifiers: { temperament: 2, luck: -1 }, rarity: 2 },
-  { id: 17, name: "矿奴余生", description: "曾是矿洞苦工，在暗无天日的矿洞中挣扎求生，体魄强健但不通文墨。", talent_cost: 0, attribute_modifiers: { root_bone: 3, spirit: -1 }, rarity: 2 },
-  { id: 18, name: "画师传人", description: "师承名家，精通丹青之道，对图谱线条有天生的理解力。", talent_cost: 3, attribute_modifiers: { comprehension: 1, charm: 2 }, rarity: 3 },
-  { id: 19, name: "古墓守陵人", description: "世代守护古墓，长期与死气阴气打交道，对鬼道有独特感悟。", talent_cost: 2, attribute_modifiers: { temperament: 2, spirit: 1 }, rarity: 4 },
-  { id: 20, name: "戏班伶人", description: "自幼学戏，擅长察言观色，魅力非凡，但向武之心不够坚定。", talent_cost: 1, attribute_modifiers: { charm: 3, temperament: -1 }, rarity: 2 },
-  { id: 21, name: "星象世家", description: "家族世代观星测运，你自小研习星象之术，对天地规律有独特理解。", talent_cost: 5, attribute_modifiers: { comprehension: 2, luck: 2 }, rarity: 5 },
-  { id: 22, name: "部落巫祝", description: "出身塞外部落，继承了巫祝的血脉，对自然之力与牲畜鸟兽有天生的亲和。", talent_cost: 4, attribute_modifiers: { spirit: 2, root_bone: 1 }, rarity: 4 },
-  { id: 23, name: "孤岛遗民", description: "生于与世隔绝的孤岛，保留着上古时代原始的练武法门。", talent_cost: 3, attribute_modifiers: { temperament: 2, comprehension: 1 }, rarity: 4 },
-  { id: 24, name: "亡国遗孤", description: "国破家亡，历经苦难，心性坚韧如铁，但背负着沉重的仇恨。", talent_cost: 2, attribute_modifiers: { temperament: 3, luck: -1 }, rarity: 3 },
+  { id: 1, name: "山野遗孤", description: "襁褓时被遗弃深山，由老猎户与一条瘸腿猎犬养大。识草木、辨兽迹，筋骨比寻常孩子硬上三分。", talent_cost: 0, attribute_modifiers: { root_bone: 1 }, rarity: 3 },
+  { id: 2, name: "书香门第", description: "诗礼传家的官宦之后，七岁通读四书，十岁能诵兵法。书读得多，心眼也比旁人多转两个弯。", talent_cost: 2, attribute_modifiers: { comprehension: 2 }, rarity: 3 },
+  { id: 3, name: "商贾之子", description: "生在盐商之家，自小在柜台后头看人下菜碟。银钱过手、笑脸迎人——江湖上最难买的是人心，他打小就懂行情。", talent_cost: 2, attribute_modifiers: { charm: 2 }, rarity: 3 },
+  { id: 4, name: "将门之后", description: "祖上是镇守边关的虎将，祠堂里还供着断了口的雁翎刀。血脉里的煞气压不住，握惯了笔的手总想去摸刀柄。", talent_cost: 3, attribute_modifiers: { temperament: 2, root_bone: 1 }, rarity: 3 },
+  { id: 5, name: "独行客传人", description: "师父是位游戏风尘的老独行客，一壶酒一把剑走遍南北。他没教你成套的武功，只教你看人、看路、看天色。", talent_cost: 4, attribute_modifiers: { comprehension: 1, temperament: 1 }, rarity: 4 },
+  { id: 6, name: "无间卧底", description: "正派出身，却奉命潜入邪派多年。两边的话都会说，两边的人都不全信——活到今天，靠的是心比别人多沉三分。", talent_cost: 1, attribute_modifiers: { temperament: 3 }, rarity: 4 },
+  { id: 7, name: "重生者", description: "大梦一场，醒来竟回到少年时。前世的仇家名单、宝藏方位、哪一年哪一派要出大事，你都记得清清楚楚——只是这一世，棋盘还来得及重下。", talent_cost: 5, attribute_modifiers: { comprehension: 2, luck: 1 }, rarity: 5 },
+  { id: 8, name: "名宿后裔", description: "武林名宿的直系血脉，襁褓时便被前辈探过根骨。经脉天生灵动，练起功来一日千里，只是这姓氏既是招牌，也是靶子。", talent_cost: 6, attribute_modifiers: { spirit: 2, root_bone: 1 }, rarity: 5 },
+  { id: 9, name: "老怪传功", description: "将死之际遇上位脾气古怪的江湖老怪，他大限将至无人可托，索性把一辈子的阅历见识一股脑塞进你脑子里。魂魄还是你的，眼睛却老了六十岁。", talent_cost: 7, attribute_modifiers: { comprehension: 3, temperament: -1 }, rarity: 5 },
+  { id: 10, name: "山神庙祝", description: "在山神庙的香火里长大，替十里八乡的猎户樵夫主持祭祀。夜里听得见山风过庙的声响，心神比常人更静、更敏。", talent_cost: 2, attribute_modifiers: { spirit: 2 }, rarity: 3 },
+  { id: 11, name: "东海渔家", description: "在江河湖海上讨生活的人家，撒网、潜水、看潮汐都是童子功。一身水性极佳，筋骨也被海风浪头打熬得结实。", talent_cost: 1, attribute_modifiers: { root_bone: 2 }, rarity: 2 },
+  { id: 12, name: "王朝皇子", description: "生在帝王家，锦衣玉食、名师环绕，骑射礼乐无一不精。只是宫墙太高，江湖太远——你对那片天地的向往，比谁都重。", talent_cost: 3, attribute_modifiers: { charm: 2, temperament: 1 }, rarity: 4 },
+  { id: 13, name: "药童出身", description: "在药房的药香里泡大，抓药从不用秤，鼻子一闻便知年份产地。掌柜的说你这双手，天生就是碾药粉、辨毒草的。", talent_cost: 2, attribute_modifiers: { spirit: 1, comprehension: 1 }, rarity: 3 },
+  { id: 14, name: "机关学徒", description: "师从机关阵法名家，自小在齿轮簧片里打滚，方位、距离、力道，一眼便能估出八九分。唐门中人见了都要多看你两眼。", talent_cost: 3, attribute_modifiers: { comprehension: 2, spirit: 1 }, rarity: 4 },
+  { id: 15, name: "猎户世家", description: "祖辈在深山里与虎豹争食，传下来的不只是猎弓，还有一身辨踪、设陷、屏息的本事。你的筋骨，是兽血喂出来的。", talent_cost: 4, attribute_modifiers: { root_bone: 2, temperament: 1 }, rarity: 4 },
+  { id: 16, name: "流浪乞丐", description: "自小在街头巷尾讨饭，桥洞里睡过，泔水里抢过。命比纸薄，皮比铁厚——活下去这件事，你比谁都在行。", talent_cost: -1, attribute_modifiers: { temperament: 2, luck: -1 }, rarity: 2 },
+  { id: 17, name: "矿奴余生", description: "在暗无天日的矿洞里做了三年苦工，镐头抡出的臂力，煤尘呛出的忍性。如今重见天日，文墨不通，一双手却能捏碎核桃。", talent_cost: 0, attribute_modifiers: { root_bone: 3, spirit: -1 }, rarity: 2 },
+  { id: 18, name: "江南画匠", description: "姑苏画铺的学徒出身，替官府画过缉捕画像，替镖局绘过山川舆图。一双眼睛过目不忘，江湖人物的相貌、机关图谱的线条，看一眼便刻在心里。", talent_cost: 3, attribute_modifiers: { comprehension: 1, charm: 2 }, rarity: 3 },
+  { id: 19, name: "古墓守陵人", description: "世代替人守着深山里的古墓，陪葬坑、机关道、守陵兽的脾性门儿清。死人见得多了，胆子与心性都磨得异于常人。", talent_cost: 2, attribute_modifiers: { temperament: 2, spirit: 1 }, rarity: 4 },
+  { id: 20, name: "戏班伶人", description: "梨园行里长大，唱念做打样样来得，一张脸能哭能笑、千人千面。只是台上演惯了别人的悲欢，自己的向武之心，总差着一口气。", talent_cost: 1, attribute_modifiers: { charm: 3, temperament: -1 }, rarity: 2 },
+  { id: 21, name: "星象世家", description: "家族世代为朝廷观星测运，你自小在钦天监的浑天仪下打转。星象历法之外，你还学会了一件事——天意这东西，信三分就够了。", talent_cost: 5, attribute_modifiers: { comprehension: 2, luck: 2 }, rarity: 5 },
+  { id: 22, name: "部落巫祝", description: "塞外大漠部落的巫祝血脉，能从鹰唳狼嗥里听出天气与祸福。族人敬你三分，汉人忌你三分，你的江湖路从一开始就不走寻常道。", talent_cost: 4, attribute_modifiers: { spirit: 2, root_bone: 1 }, rarity: 4 },
+  { id: 23, name: "孤岛遗民", description: "生在海外孤岛，岛民练的是上古传下的原始武法，招式不花哨，一拳一脚都要命。与世隔绝十八年，你第一次踏上中原的土地。", talent_cost: 3, attribute_modifiers: { temperament: 2, comprehension: 1 }, rarity: 4 },
+  { id: 24, name: "亡国遗孤", description: "故国倾覆那夜，你从死人堆里爬出来。仇家的名字刻在心里，念了十年——这条命是捡来的，所以你比谁都不怕死。", talent_cost: 2, attribute_modifiers: { temperament: 3, luck: -1 }, rarity: 3 },
+  { id: 25, name: "镖局趟子手", description: "替镖局喊镖的趟子手，走南闯北，黑白两道的切口都懂。腿脚是跑出来的，胆气是吓出来的。", talent_cost: 3, attribute_modifiers: { root_bone: 2, temperament: 1 }, rarity: 3 },
+  { id: 26, name: "说书先生之后", description: "父亲是茶馆的说书先生，醒木一拍，满座听他讲三侠五义。你从小听着江湖故事长大，真到了江湖里，发现故事只说对了一半。", talent_cost: 3, attribute_modifiers: { comprehension: 1, charm: 2 }, rarity: 3 },
+  { id: 27, name: "仵作之子", description: "世代仵作，验尸是祖传的手艺。刀伤箭伤中毒伤，你扫一眼便知来历；死人不会说谎，所以你比活人更信死人。", talent_cost: 2, attribute_modifiers: { spirit: 1, temperament: 2 }, rarity: 3 },
+  { id: 28, name: "勾栏琴师", description: "在勾栏瓦舍里抚琴卖艺，指尖功夫与眼力都是人堆里练出来的。达官贵人的秘辛听得多了，嘴却比琴弦还紧。", talent_cost: 3, attribute_modifiers: { charm: 2, spirit: 1 }, rarity: 3 },
+  { id: 29, name: "药王谷弃徒", description: "曾是药王谷的记名弟子，因偷学谷中禁方被逐出山门。一身药理毒理是真的，师门的追责也是真的。", talent_cost: 4, attribute_modifiers: { spirit: 2, comprehension: 1 }, rarity: 4 },
+  { id: 30, name: "海岛采珠人", description: "东海疍家后人，赤足潜入十丈深海采珠，与鲨鱼抢过食。运气这东西，你一向是拿命换的——而且换赢了好几次。", talent_cost: 3, attribute_modifiers: { root_bone: 1, luck: 2 }, rarity: 4 },
+  { id: 31, name: "铸剑山庄学徒", description: "在铸剑山庄的炉火边打了五年铁，淬火声里听得出钢的成色。庄主说你这双手，将来不是握剑的，是铸剑的。", talent_cost: 4, attribute_modifiers: { root_bone: 1, spirit: 1, comprehension: 1 }, rarity: 4 },
+  { id: 32, name: "世家逃婚者", description: "武林世家给你订的婚约对象是个人面兽心的货色，你在花轿临门那夜翻墙跑了。身后是两家的追兵，前头是整个江湖——反而是你这辈子最自由的一天。", talent_cost: 4, attribute_modifiers: { charm: 2, luck: 1, temperament: 1 }, rarity: 4 },
+  { id: 33, name: "藏经阁扫地人", description: "在藏经阁扫了十年地，扫帚之余，阁里的经书武典你也‘顺便’看了十年。没人记得你的名字，你却记得每一本书放在第几格。", talent_cost: 5, attribute_modifiers: { comprehension: 3 }, rarity: 5 },
+  { id: 34, name: "藏宝图传人", description: "祖上传下一张残破的藏宝图，图上的地名有一半已经不存在了。江湖上惦记这张图的人，比惦记你的人多得多。", talent_cost: 6, attribute_modifiers: { luck: 3, comprehension: 1 }, rarity: 5 },
 ];
 
 // =======================================================================
@@ -391,7 +401,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 1,
     name: "天命主角",
-    description: "气运惊人，总是能在绝境中逢生，获得意想不到的机缘。",
+    description: "跳崖得秘籍、落水遇高人，连客栈最后一间上房都总是留给你的。气运这东西看不见摸不着，但它偏心你，偏得明目张胆。",
     talent_cost: 15,
     rarity: 5,
     effects: [{ 类型: "后天六司", 目标: "气运", 数值: 8 }, { 类型: "特殊能力", 名称: "逢凶化吉", 数值: 0.1 }]
@@ -399,7 +409,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 2,
     name: "剑道独尊",
-    description: "天生剑心通明，任何剑法一看便会，且威力倍增。",
+    description: "剑在你手里像长在身上。任何剑谱看一遍便能使出七分神韵，剑客们苦练十年的关窍，你往往一眼看破。",
     talent_cost: 12,
     rarity: 5,
     effects: [{ 类型: "技能加成", 技能: "剑法", 数值: 0.2 }, { 类型: "后天六司", 目标: "根骨", 数值: 3 }]
@@ -407,15 +417,15 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 3,
     name: "药道圣手",
-    description: "对药理有超凡的领悟力，炼药成功率与品质大幅提升。",
+    description: "药材过手便知真伪年份，同一张方子，你配出来的药就是比别人多三分药力。药王谷的长老见了都要叹一声天授。",
     talent_cost: 12,
     rarity: 5,
     effects: [{ 类型: "技能加成", 技能: "炼丹", 数值: 0.15 }, { 类型: "后天六司", 目标: "悟性", 数值: 2 }]
   },
   {
     id: 4,
-    name: "阵法大师",
-    description: "对阵法有极高的天赋，学习和布置阵法的效率大大提高。",
+    name: "机关大师",
+    description: "齿轮、簧片、牵线、伏弩——机关在你眼里没有秘密，只有还没拆开的锁。布阵破阵，皆如掌纹般分明。",
     talent_cost: 8,
     rarity: 4,
     effects: [{ 类型: "技能加成", 技能: "阵法", 数值: 0.12 }, { 类型: "后天六司", 目标: "悟性", 数值: 2 }]
@@ -423,7 +433,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 5,
     name: "铸器鬼才",
-    description: "天生对各种材料有敏锐的感知，炼器时更容易出现极品。",
+    description: "铁料矿石一上手，便知火候与成色。别人铸的是兵器，你铸出来的东西，像是自己长了脾气。",
     talent_cost: 8,
     rarity: 4,
     effects: [{ 类型: "技能加成", 技能: "炼器", 数值: 0.1 }, { 类型: "特殊能力", 名称: "材料感知", 数值: 1 }]
@@ -431,7 +441,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 6,
     name: "多宝童子",
-    description: "出门历练时，更容易发现天材地宝。",
+    description: "出门踩到的石头都比别人圆润三分。山洞里、破庙中、河滩上，总有些别人看不见的好东西在等你弯腰。",
     talent_cost: 7,
     rarity: 4,
     effects: [{ 类型: "后天六司", 目标: "气运", 数值: 3 }, { 类型: "特殊能力", 名称: "寻宝天赋", 数值: 0.15 }]
@@ -439,7 +449,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 7,
     name: "横练奇才",
-    description: "肉身天生强横，气血旺盛，适合修炼体修功法。",
+    description: "筋骨皮肉天生强横，金钟罩铁布衫这类功夫练起来事半功倍，一拳打上去，先疼的是对方的拳头。",
     talent_cost: 5,
     rarity: 3,
     effects: [{ 类型: "后天六司", 目标: "根骨", 数值: 3 }, { 类型: "特殊能力", 名称: "体修天赋", 数值: 0.1 }]
@@ -447,7 +457,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 8,
     name: "感知过人",
-    description: "天生感知强大，不易被心魔入侵，施展感知秘术效果更佳。",
+    description: "耳聪目明之外，还有一种说不清的直觉。暗器破空前的那一丝风声、心怀恶意者的目光，你总能先一步察觉。",
     talent_cost: 5,
     rarity: 3,
     effects: [{ 类型: "后天六司", 目标: "悟性", 数值: 3 }, { 类型: "特殊能力", 名称: "心魔抗性", 数值: 0.1 }]
@@ -455,7 +465,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 9,
     name: "身法鬼魅",
-    description: "身法飘逸，战斗中闪避能力更强。",
+    description: "身子轻得像没有重量，屋檐瓦片上走过不留声。打不过的时候跑得掉，跑不掉的时候——你还没遇到过。",
     talent_cost: 4,
     rarity: 3,
     effects: [{ 类型: "后天六司", 目标: "灵性", 数值: 2 }, { 类型: "特殊能力", 名称: "闪避天赋", 数值: 0.08 }]
@@ -463,7 +473,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 10,
     name: "农夫之子",
-    description: "出身凡人，心性坚韧，对灵植有额外的亲和力。",
+    description: "田里长大的孩子，手脚勤快，心也踏实。侍弄草药灵植格外有心得——庄稼不会骗人，你也不会。",
     talent_cost: 2,
     rarity: 2,
     effects: [{ 类型: "后天六司", 目标: "心性", 数值: 1 }, { 类型: "特殊能力", 名称: "灵植亲和", 数值: 0.1 }]
@@ -471,7 +481,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 11,
     name: "过目不忘",
-    description: "记忆力超群，学习功法秘籍速度加快。",
+    description: "看过的书页、走过的路、见过的人脸，全都刻在脑子里。秘籍这种东西，你翻一遍就是你的了。",
     talent_cost: 2,
     rarity: 2,
     effects: [{ 类型: "后天六司", 目标: "悟性", 数值: 2 }]
@@ -479,7 +489,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 12,
     name: "老实人",
-    description: "与人交易时，不容易被欺骗。",
+    description: "一张老实脸是天生的护身符，奸商想宰你都要先犹豫三分。江湖险恶，你靠的全是别人对你的低估。",
     talent_cost: 1,
     rarity: 1,
     effects: [{ 类型: "特殊能力", 名称: "防欺诈", 数值: 1 }]
@@ -487,7 +497,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 13,
     name: "一诺千金",
-    description: "你的承诺极具分量，更容易获得他人的信任与好感。",
+    description: "你答应的事，江湖人当真金白银收。信誉这东西攒起来慢，但你天生起步就比别人高一截。",
     talent_cost: 3,
     rarity: 2,
     effects: [{ 类型: "后天六司", 目标: "魅力", 数值: 2 }]
@@ -495,7 +505,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 14,
     name: "天生毒体",
-    description: "百毒不侵，且能更好地驾驭毒功，但常人不敢轻易接近。",
+    description: "自幼误食毒物大难不死，反落得百毒不侵。毒功在你手里如虎添翼，只是寻常人闻到你指尖的药气，总要退开半步。",
     talent_cost: 6,
     rarity: 4,
     effects: [{ 类型: "特殊能力", 名称: "毒素免疫", 数值: 1 }, { 类型: "技能加成", 技能: "毒术", 数值: 0.15 }, { 类型: "后天六司", 目标: "魅力", 数值: -2 }]
@@ -503,7 +513,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 15,
     name: "画龙点睛",
-    description: "在制作图谱时，有一定几率产生意想不到的强大效果。",
+    description: "落笔之处，图谱生辉。你绘制的机关图、舆图偶尔会多出一分神髓，连老师傅都要拿去临摹。",
     talent_cost: 4,
     rarity: 3,
     effects: [{ 类型: "技能加成", 技能: "符箓", 数值: 0.1 }, { 类型: "特殊能力", 名称: "图谱变异", 数值: 0.05 }]
@@ -511,7 +521,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 16,
     name: "顶级魅力",
-    description: "天生丽质，气质非凡，魅力超群。无论走到哪里都是众人瞩目的焦点，极容易获得他人的好感与信任。在社交场合如鱼得水，能够以言语和魅力化解大部分冲突。",
+    description: "眉目生得太好，气质又压得住场。酒楼上你一开口，满座的刀都慢了三分——美貌在江湖上，从来都是兵器。",
     talent_cost: 8,
     rarity: 4,
     effects: [{ 类型: "后天六司", 目标: "魅力", 数值: 5 }, { 类型: "特殊能力", 名称: "魅力光环", 数值: 0.2 }, { 类型: "特殊能力", 名称: "社交天赋", 数值: 0.15 }]
@@ -519,7 +529,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 17,
     name: "武心坚固",
-    description: "道心如铁，心魔难侵。突破时更不容易走火入魔，受到诱惑和幻术影响的几率大幅降低。",
+    description: "心志如铁，泰山崩于前而色不变。走火入魔、幻术蛊惑这些软刀子，在你这里很难找到下口的地方。",
     talent_cost: 6,
     rarity: 4,
     effects: [{ 类型: "后天六司", 目标: "心性", 数值: 3 }, { 类型: "特殊能力", 名称: "心魔抗性", 数值: 0.3 }]
@@ -527,7 +537,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 18,
     name: "天生神力",
-    description: "天生力大无穷，体质远超常人。擅长近战搏杀，气血旺盛。",
+    description: "单臂能举石狮子的那种力气，还在长。近身搏杀你从不讲理，因为你的拳头就是道理。",
     talent_cost: 5,
     rarity: 3,
     effects: [{ 类型: "后天六司", 目标: "根骨", 数值: 4 }, { 类型: "特殊能力", 名称: "近战增幅", 数值: 0.2 }]
@@ -535,7 +545,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 19,
     name: "灵觉敏锐",
-    description: "六感超凡，对危险有本能的预感。在战斗和探险中能够提前感知到威胁。",
+    description: "第六感准得吓人。杀气未至，你后颈的汗毛先立起来了——靠这一手，你已经躲过不止一次暗算。",
     talent_cost: 4,
     rarity: 3,
     effects: [{ 类型: "后天六司", 目标: "灵性", 数值: 3 }, { 类型: "特殊能力", 名称: "危险感知", 数值: 1 }]
@@ -543,7 +553,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 20,
     name: "夜猫子",
-    description: "夜晚精神百倍，修炼效率提升。但白天会感到困倦。",
+    description: "白日里呵欠连天，入夜反而精神百倍。月亮底下练功读书，效率远胜晨光——江湖夜行人，说的就是你。",
     talent_cost: 1,
     rarity: 2,
     effects: [{ 类型: "特殊能力", 名称: "夜间修炼加速", 数值: 0.3 }]
@@ -551,7 +561,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 21,
     name: "福缘深厚",
-    description: "受天道眷顾，突破时成功率更高，遭遇天劫时威力减弱。",
+    description: "逢凶化吉的命。突破瓶颈时总差的那一口气，命运往往替你补上；别人九死一生，你总能多出那一生。",
     talent_cost: 10,
     rarity: 5,
     effects: [{ 类型: "后天六司", 目标: "气运", 数值: 5 }, { 类型: "特殊能力", 名称: "突破成功率", 数值: 0.2 }, { 类型: "特殊能力", 名称: "天劫削弱", 数值: 0.15 }]
@@ -559,7 +569,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 22,
     name: "剑骨天成",
-    description: "天生剑骨，与剑有莫名的契合。剑法威力倍增，领悟剑意速度极快。",
+    description: "脊骨如剑，宁折不弯。剑意这种玄之又玄的东西，你领悟起来像认亲——它本来就是你的一部分。",
     talent_cost: 10,
     rarity: 5,
     effects: [{ 类型: "后天六司", 目标: "根骨", 数值: 2 }, { 类型: "技能加成", 技能: "剑法", 数值: 0.25 }, { 类型: "特殊能力", 名称: "剑意感悟", 数值: 0.2 }]
@@ -567,15 +577,15 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 23,
     name: "天生武体",
-    description: "传说中的道体，天生契合天地大道，修炼任何功法都事半功倍。",
+    description: "经脉宽阔如江河，丹田深不见底，任何功法到了你身上都如百川归海。老一辈见了要摇头：这种体质，一代人里出不了一个。",
     talent_cost: 18,
     rarity: 5,
     effects: [{ 类型: "后天六司", 目标: "悟性", 数值: 4 }, { 类型: "后天六司", 目标: "灵性", 数值: 4 }, { 类型: "特殊能力", 名称: "万法精通", 数值: 0.3 }]
   },
   {
     id: 24,
-    name: "纹谱奇才",
-    description: "对图谱有超凡的领悟，绘制图谱成功率高，威力强大。",
+    name: "图谱奇才",
+    description: "线条在你眼里是活的。机关图的咬合、阵图的生克、舆图的山川走向，一眼看去便如掌上观纹。",
     talent_cost: 7,
     rarity: 4,
     effects: [{ 类型: "后天六司", 目标: "悟性", 数值: 2 }, { 类型: "技能加成", 技能: "符箓", 数值: 0.2 }, { 类型: "特殊能力", 名称: "图谱精通", 数值: 0.15 }]
@@ -583,7 +593,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 25,
     name: "驭兽亲和",
-    description: "天生亲和灵兽，更容易收服和沟通灵兽，灵兽战力提升。",
+    description: "凶犬见你摇尾，烈马任你抚鬃。兽类对你的善意毫无道理可讲，就像你天生是它们那一边的。",
     talent_cost: 6,
     rarity: 4,
     effects: [{ 类型: "后天六司", 目标: "魅力", 数值: 2 }, { 类型: "特殊能力", 名称: "灵兽契约", 数值: 0.3 }, { 类型: "特殊能力", 名称: "灵兽战力", 数值: 0.2 }]
@@ -591,7 +601,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 26,
     name: "天生魔心",
-    description: "心性偏向魔道，修炼魔功速度极快，但容易走火入魔。正道功法修炼困难。",
+    description: "心思走的是险路。邪派功法到了你手里进境一日千里，只是悬崖边上走路，风一大，就容易出事。",
     talent_cost: 5,
     rarity: 4,
     effects: [{ 类型: "后天六司", 目标: "心性", 数值: -2 }, { 类型: "特殊能力", 名称: "魔功加速", 数值: 0.4 }, { 类型: "特殊能力", 名称: "走火入魔", 数值: 0.15 }]
@@ -599,7 +609,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 27,
     name: "铸器宗师",
-    description: "对炼器有非凡的天赋，炼制的法器品质更高，成功率更高。",
+    description: "宗师级的铸造直觉。你开炉之前就知道这一炉出什么，江湖上排队等你兵器的人，能从山门排到山脚。",
     talent_cost: 9,
     rarity: 4,
     effects: [{ 类型: "后天六司", 目标: "悟性", 数值: 2 }, { 类型: "技能加成", 技能: "炼器", 数值: 0.25 }, { 类型: "特殊能力", 名称: "极品概率", 数值: 0.1 }]
@@ -607,7 +617,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 28,
     name: "孤星命格",
-    description: "天煞孤星，注定孤独一生。气运极低，但在绝境中更容易突破。",
+    description: "天煞孤星，亲近你的人总多灾多难。气运差到了极点，反而把心志磨成了铁——绝境对你来说，是家常便饭。",
     talent_cost: -3,
     rarity: 3,
     effects: [{ 类型: "后天六司", 目标: "气运", 数值: -5 }, { 类型: "特殊能力", 名称: "绝境突破", 数值: 0.3 }]
@@ -615,7 +625,7 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 29,
     name: "先知梦境",
-    description: "偶尔能在梦中窥见未来的片段，提前规避危险或把握机缘。",
+    description: "梦里偶尔会去到几天之后的某个场景，醒来只记得碎片。靠这些碎片，你躲过了几场本该要命的祸事。",
     talent_cost: 8,
     rarity: 5,
     effects: [{ 类型: "后天六司", 目标: "悟性", 数值: 2 }, { 类型: "后天六司", 目标: "气运", 数值: 3 }, { 类型: "特殊能力", 名称: "预知危险", 数值: 1 }]
@@ -623,9 +633,89 @@ export const LOCAL_TALENTS: Omit<Talent, 'source'>[] = [
   {
     id: 30,
     name: "龟息之体",
-    description: "天生寿元悠长，比常人更不易衰老，有更多时间追求大道。",
+    description: "呼吸慢得像冬眠的老龟，寿元比常人绵长许多。武道路远，你最不缺的就是时间。",
     talent_cost: 12,
     rarity: 5,
     effects: [{ 类型: "后天六司", 目标: "根骨", 数值: 3 }, { 类型: "特殊能力", 名称: "寿命延长", 数值: 0.3 }]
+  },
+  {
+    id: 31,
+    name: "左右互搏之资",
+    description: "左手画方、右手画圆，心能两用。常人练双手兵器是折磨，你练起来像天生就该如此——这份资质，世上没几个人有。",
+    talent_cost: 9,
+    rarity: 5,
+    effects: [{ 类型: "后天六司", 目标: "悟性", 数值: 2 }, { 类型: "特殊能力", 名称: "一心二用", 数值: 0.2 }]
+  },
+  {
+    id: 32,
+    name: "梦中授艺",
+    description: "睡梦里总有个看不清面目的老人喂招，醒来招式便多懂了三分。这梦做了十几年，你至今不知道他是谁。",
+    talent_cost: 8,
+    rarity: 5,
+    effects: [{ 类型: "后天六司", 目标: "悟性", 数值: 3 }, { 类型: "特殊能力", 名称: "梦境传承", 数值: 0.1 }]
+  },
+  {
+    id: 33,
+    name: "顺风耳",
+    description: "三十步外的落叶、隔墙的低语、弓弦将响未响的那一颤，都逃不过你的耳朵。暗器想偷袭你，先得问过风声。",
+    talent_cost: 5,
+    rarity: 3,
+    effects: [{ 类型: "后天六司", 目标: "灵性", 数值: 3 }, { 类型: "特殊能力", 名称: "危险感知", 数值: 1 }]
+  },
+  {
+    id: 34,
+    name: "夜眼如昼",
+    description: "瞳仁天生异于常人，无月之夜也能视物如昼。夜行、夜袭、夜读秘籍，你占尽便宜。",
+    talent_cost: 3,
+    rarity: 2,
+    effects: [{ 类型: "后天六司", 目标: "灵性", 数值: 2 }, { 类型: "特殊能力", 名称: "夜间修炼加速", 数值: 0.2 }]
+  },
+  {
+    id: 35,
+    name: "乌鸦嘴",
+    description: "好的不灵坏的灵，‘这趟镖肯定出事’一说出口，镖师们脸都绿了。朋友们又爱带你出门，又怕你开口。",
+    talent_cost: -1,
+    rarity: 2,
+    effects: [{ 类型: "后天六司", 目标: "气运", 数值: -2 }, { 类型: "后天六司", 目标: "魅力", 数值: 1 }, { 类型: "特殊能力", 名称: "言出祸随", 数值: 0.1 }]
+  },
+  {
+    id: 36,
+    name: "风流命格",
+    description: "桃花运旺得不像话，走到哪都有人多看你两眼、多帮你一把。情债也是债——这笔账，迟早要还。",
+    talent_cost: 6,
+    rarity: 4,
+    effects: [{ 类型: "后天六司", 目标: "魅力", 数值: 4 }, { 类型: "特殊能力", 名称: "社交天赋", 数值: 0.1 }]
+  },
+  {
+    id: 37,
+    name: "痛觉迟钝",
+    description: "断骨之痛在你这里只算钝痒。敌人最怕你这种人：打不疼，就吓不退。",
+    talent_cost: 5,
+    rarity: 3,
+    effects: [{ 类型: "后天六司", 目标: "根骨", 数值: 2 }, { 类型: "后天六司", 目标: "心性", 数值: 2 }, { 类型: "特殊能力", 名称: "体修天赋", 数值: 0.1 }]
+  },
+  {
+    id: 38,
+    name: "鹰眼",
+    description: "目光锐利如鹰隼，百步之外穿针引线也看得真切。飞石暗器到了你手里，指哪打哪。",
+    talent_cost: 4,
+    rarity: 3,
+    effects: [{ 类型: "后天六司", 目标: "灵性", 数值: 2 }, { 类型: "特殊能力", 名称: "危险感知", 数值: 0.5 }]
+  },
+  {
+    id: 39,
+    name: "铁齿铜牙",
+    description: "一张嘴能把死人说活、把价钱砍到掌柜哭。谈判桌上你从没输过，因为你根本不按对方的剧本接话。",
+    talent_cost: 3,
+    rarity: 2,
+    effects: [{ 类型: "后天六司", 目标: "魅力", 数值: 2 }, { 类型: "后天六司", 目标: "心性", 数值: 1 }, { 类型: "特殊能力", 名称: "防欺诈", 数值: 1 }]
+  },
+  {
+    id: 40,
+    name: "无招胜有招",
+    description: "你学招忘招比谁都快。临敌之时心中无招，手上便无处不是招——这份境界，许多宗师临死都没摸到门槛。",
+    talent_cost: 11,
+    rarity: 5,
+    effects: [{ 类型: "后天六司", 目标: "悟性", 数值: 3 }, { 类型: "特殊能力", 名称: "剑意感悟", 数值: 0.15 }]
   },
 ];
