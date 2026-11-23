@@ -268,12 +268,37 @@ export class EnhancedWorldGenerator {
         // 检查是否是用户修改过的（通过检查 modified 标记）
         const allPrompts = await promptStorage.loadAll();
         if (allPrompts['worldGeneration']?.modified || JINYONG_PROMPTS.worldGeneration) {
-          return customPrompt;
+          return this.applyPlayerContinentCount(customPrompt, continentCount);
         }
       }
 
       return defaultPrompt;
     }
+
+  /**
+   * 把创角时玩家指定的大陆数量注入自定义世界生成提示词。
+   * 金庸版提示词原文让 AI 在 4/5/6 里随机取 N，会盖掉界面上的大陆数量设置；
+   * 这里改写随机措辞，并在末尾追加最高优先级覆盖段（网格排布按通用规则，
+   * 同时覆盖 3 与 7 这类原文未列出布局的数量）。
+   */
+  private applyPlayerContinentCount(prompt: string, n: number): string {
+    if (!Number.isFinite(n) || n < 1) return prompt;
+    const cols = Math.ceil(n / 2);
+    const bounds = Array.from({ length: cols + 1 }, (_, i) => Math.round((10000 / cols) * i)).join(' / ');
+    let p = prompt
+      .replace(/N 在生成开始时于 4、5、6 中随机取一/, `N 已由玩家在创角时指定为 ${n}，不得自行更改`)
+      .replace(/（N个，N=4~6随机）/, `（N=${n}个，玩家指定）`)
+      .replace(/先定 N（4\/5\/6 随机其一）/, `N=${n}（玩家指定）`);
+    p += `
+
+【最高优先级：大陆数量以玩家指定为准】
+本次 N = ${n}（玩家在创角界面指定）。上文任何"随机取 N"的说法一律作废，必须恰好生成：
+- continents：${n} 个疆域
+- factions：${n + 2} 个势力
+- locations：${2 * n + 2} 个地点（类型分布按总数等比例参照上文表格）
+网格排布（覆盖上文按 N 分列的布局，统一按此规则）：固定 2 行，行高 5000（y 边界 0 / 5000 / 10000）；共 ${cols} 列，x 边界为 ${bounds}；疆域按从左到右、先上行后下行逐格填充：上行放满 ${cols} 个，下行放剩余 ${n - cols} 个；若下行未放满，下行最后一个疆域横向拉伸，占满下行剩余的全部列宽。拼起来必须完整覆盖地图、不留空缺，相邻疆域共享网格角点。`;
+    return p;
+  }
 
   /**
    * 解析AI响应 - 智能处理强JSON模式和普通模式
