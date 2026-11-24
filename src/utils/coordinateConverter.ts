@@ -21,7 +21,7 @@ const FACTION_COLOR_RULES: Array<{ match: RegExp; color: string }> = [
   { match: /(世家|门阀|家族)/i, color: '#0F766E' },
   { match: /(商会|商盟|商号)/i, color: '#B45309' },
   { match: /(妖|兽|灵族|异族)/i, color: '#047857' },
-  { match: /(联盟|散修)/i, color: '#6B7280' },
+  { match: /(联盟|散修|散人)/i, color: '#6B7280' },
 ];
 
 const clampValue = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value));
