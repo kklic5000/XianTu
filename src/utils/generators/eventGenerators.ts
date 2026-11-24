@@ -42,7 +42,7 @@ function inferSpecialNpcSceneTags(args: { worldInfo?: WorldInfo | null; location
 
   if (has('修仙', '灵气', '宗门', '秘境', '洞府', '坊市', '仙', '道')) tags.add('xianxia');
   if (has('宗门', '山门', '内门', '外门', '长老')) tags.add('sect');
-  if (has('江湖', '游侠', '散修', '客栈')) tags.add('jianghu');
+  if (has('江湖', '游侠', '散人', '散修', '客栈')) tags.add('jianghu');
 
   return Array.from(tags);
 }
