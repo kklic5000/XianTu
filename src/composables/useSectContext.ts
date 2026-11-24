@@ -57,7 +57,7 @@ export function useSectContext() {
     String(memberInfo.value?.宗门名称 || leader.value.sectName || sectSystem.value?.当前宗门 || '').trim(),
   );
   const joined = computed(() => !!sectName.value);
-  const position = computed(() => String(leader.value.position || memberInfo.value?.职位 || '散修'));
+  const position = computed(() => String(leader.value.position || memberInfo.value?.职位 || '散人'));
   const contribution = computed(() => Number(memberInfo.value?.贡献 ?? 0) || 0);
   const reputation = computed(() => Number(memberInfo.value?.声望 ?? 0) || 0);
   const joinDate = computed(() => String(memberInfo.value?.加入日期 || ''));
