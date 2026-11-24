@@ -167,9 +167,9 @@ export function validateAndRepairNpcProfile(npcData: unknown, gameTime?: GameTim
     }
 
     try {
-      if (!repairedNpc.出生) repairedNpc.出生 = '散修';
+      if (!repairedNpc.出生) repairedNpc.出生 = '散人';
     } catch (e) {
-      repairedNpc.出生 = '散修';
+      repairedNpc.出生 = '散人';
     }
 
     try {
