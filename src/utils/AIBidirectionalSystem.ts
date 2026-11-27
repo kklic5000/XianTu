@@ -1380,6 +1380,66 @@ ${step1Text}
       console.warn('[AI双向系统] 招式消耗结算失败（忽略）:', e);
     }
 
+    // 金庸模式：武功建档看门狗。AI 常只登记功法进度却漏建背包物品（功法页按物品统计，漏建即不显示）。
+    // 凡功法进度里有的 ID，背包里必须有同 ID 且类型为「功法」的物品；缺失时从本回合叙事的《》标题
+    // 推定武功名自动补建，类型写错的只改类型。推不出名字则跳过（不编造）。
+    try {
+      const narrative = typeof (response as any).text === 'string' ? (response as any).text : '';
+      const role: any = (saveData as any).角色 ?? {};
+      const progState: Record<string, any> = role.功法?.功法进度 ?? {};
+      const itemsState: Record<string, any> = role.背包?.物品 ?? {};
+      const cmds: any[] = Array.isArray(response.tavern_commands) ? response.tavern_commands : [];
+      const progAfter = new Map<string, any>();
+      for (const [id, v] of Object.entries(progState)) progAfter.set(id, v);
+      const itemAfter = new Map<string, any>();
+      for (const [id, v] of Object.entries(itemsState)) itemAfter.set(id, v);
+      for (const c of cmds) {
+        if (typeof c?.key !== 'string') continue;
+        let m = c.key.match(/^角色\.功法\.功法进度\.([^.]+)$/);
+        if (m && c.action === 'set' && c.value && typeof c.value === 'object') progAfter.set(m[1], c.value);
+        if (m && c.action === 'delete') progAfter.delete(m[1]);
+        m = c.key.match(/^角色\.背包\.物品\.([^.]+)$/);
+        if (m && c.action === 'set' && c.value && typeof c.value === 'object') itemAfter.set(m[1], c.value);
+        if (m && c.action === 'delete') itemAfter.delete(m[1]);
+      }
+      const knownNames = new Set<string>();
+      for (const it of itemAfter.values()) if (it?.名称) knownNames.add(String(it.名称));
+      const titleCandidates: string[] = [];
+      for (const t of narrative.matchAll(/《([^》]{2,12})》/g)) {
+        const name = t[1].trim();
+        if (name && !knownNames.has(name) && !titleCandidates.includes(name)) titleCandidates.push(name);
+      }
+      const autoCmds: any[] = [];
+      let titleIdx = 0;
+      for (const [id, prog] of progAfter) {
+        const it = itemAfter.get(id);
+        if (it && it.类型 !== '功法') {
+          autoCmds.push({ action: 'set', key: `角色.背包.物品.${id}.类型`, value: '功法' });
+          console.warn(`[AI双向系统] 建档看门狗: 物品 ${id} 类型修正为功法`);
+          continue;
+        }
+        if (it) continue;
+        const name = titleCandidates[titleIdx++];
+        if (!name) continue;
+        const unlocked: string[] = Array.isArray(prog?.已解锁技能) ? prog.已解锁技能.filter((s: any) => typeof s === 'string') : [];
+        const prof = typeof prog?.熟练度 === 'number' ? prog.熟练度 : 0;
+        autoCmds.push({
+          action: 'set', key: `角色.背包.物品.${id}`,
+          value: {
+            物品ID: id, 名称: name, 类型: '功法', 品质: { quality: '凡', grade: 3 }, 数量: 1,
+            描述: '（系统自动补录）AI 登记了功法进度但漏建物品，已自动补档；名称取自本回合叙事。',
+            功法效果: '',
+            功法技能: unlocked.map((n: string) => ({ 技能名称: n, 技能描述: '', 熟练度要求: 0, 消耗: '' })),
+            修炼进度: prof, 已解锁技能: unlocked, 已装备: false, 修炼中: false,
+          },
+        });
+        console.warn(`[AI双向系统] 建档看门狗: 为功法进度 ${id} 自动补建物品《${name}》`);
+      }
+      if (autoCmds.length) response.tavern_commands = [...cmds, ...autoCmds];
+    } catch (e) {
+      console.warn('[AI双向系统] 建档看门狗失败（忽略）:', e);
+    }
+
     if (!response.tavern_commands?.length) {
       return { saveData, stateChanges: { changes, timestamp: new Date().toISOString() } };
     }
